@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><Sys-config>
+<DB_conf>
+	<HostName>192.168.55.24</HostName>
+	<Port>3306</Port>
+	<DBname>aswssys</DBname>
+	<Usrname>TMS_DBadmin</Usrname>
+	<Passwd>123</Passwd><!--系统数据库配置信息-->
+</DB_conf>
+	<LDAP_conf>
+		<host>192.168.70.1</host>
+		<port>389</port>
+		<domain>@tech.bitauto.com</domain>
+		<admin>scadmin</admin>
+		<pwd>aw3ZSE$XDR%</pwd></LDAP_conf>
+	<Mail_conf>
+		<smtpHost>mail.hd.cig.com.cn</smtpHost>
+		<account>asws@hd.cig.com.cn</account>
+		<passwd>NDU886mckJ</passwd>
+		<tls>false</tls>
+		<ssl>false</ssl>
+		<port>25</port>
+		<auth>true</auth></Mail_conf></Sys-config>

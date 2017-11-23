@@ -1,0 +1,72 @@
+body{
+	overflow-y : hidden;
+	overflow-x : hidden;
+}
+header{
+	display:block;
+	position:relative;
+	top:5px;
+	left:5px;
+	height:32px;
+	padding-left:20px;
+	padding-top:2px;
+	background-color: #09867D;
+	border:2px solid #09867D;
+	border-top-right-radius:8px;
+	border-top-left-radius:8px;	
+	width:480px;
+	line-height:32px;
+	font-size: 16px;
+	font-family:'微软雅黑';
+	color:#FFFFFF;
+}
+textarea{
+	display: block; 
+	position: relative; 
+	height: 50px; 
+	-webkit-box-sizing: content-box; 
+	-moz-box-sizing: content-box; 
+	box-sizing: content-box; 
+	width: 430px; 
+	background-color: #E6ECF0;
+}
+input{
+	background-color: #E6ECF0;
+}
+.inputbox{
+	background-color: #E6ECF0;
+	width:80px;
+}
+.formbody{
+	width:460px;
+	display:block;
+	position:relative;
+	top:5px;
+	left:5px;
+	padding-top:10px;
+	padding-left:20px;
+	padding-right:20px;
+	padding-bottom:10px;
+	border:2px solid #09867D;
+	background-color:#FFFFFF;
+	border-bottom-right-radius:3px;
+	border-bottom-left-radius:3px;
+	font-family:'微软雅黑';
+	font-size:12px;	
+	line-height: 25px;
+}
+.note{
+	width: 440px;	 
+	position: relative;
+	top: 10px;
+	font-size: 12px;
+	font-family:'微软雅黑';
+	text-align: left; 
+	border: thin dashed #010915; 
+	padding: 8px;   
+	padding-top: 2px; 
+	border-radius: 5px; 
+	padding-bottom: 10px; 
+	line-height: 30px;
+	margin-bottom:10px;
+}

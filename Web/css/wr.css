@@ -1,0 +1,263 @@
+body{
+	margin:0px;
+	overflow-x : hidden;
+}
+button{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	border-radius:5px;
+	border:1px solid #295669;
+	background-color:#C8CDF3;
+	height:25px;
+	margin-right:8px;
+}
+input{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+}
+.overlay{
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:3; 	
+	border:0;
+	margin:0;	
+}
+#container{
+	padding:50px;
+	padding-bottom:100px;
+	padding-top:30px;
+	width: 960px;
+	background-color: #FFFFFF;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 20px;
+	background-origin: border-box;
+	box-shadow: 10px 15px 10px 2px #B3C5DF;
+	border: thin solid #072E68;
+}
+#newWR{
+	display:none;
+	position:relative;
+}
+#title{
+	font-family:'微软雅黑';	
+	font-size: 26px;
+	text-align:center;
+}
+#welcome{
+	display:block;
+	position:relative;
+	top:0px;
+	left:5px;
+	font-family:'微软雅黑';	
+	font-size: 12px;
+}
+#content{
+	display:block;
+	position:relative;
+	top:20px;
+	left:5px;
+}
+#wr_list th{
+	background-color: #8FD7E0;
+	height:30px;
+	font-family:'微软雅黑';	
+	font-size: 14px;
+}
+#wr_list td{
+	height:30px;
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	text-align:center;
+}
+#wr_items th{
+	height:30px;
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	text-align:center;
+	background-color: #D7F0F4;
+	border-bottom:1px solid #000000;
+	border-top:1px solid #000000;
+	border-right:1px solid #000000;
+}
+#wr_items td{
+	background-color: #FFFFFF;
+	border-bottom:1px solid #000000;
+	border-right:1px solid #000000;
+	line-height:25px;
+}
+#wr_items textarea{
+	height:50px;
+	border:0px;
+}
+#pages{
+	display:block;
+	position:relative;
+	top:40px;
+	text-align:center;
+	font-family:'微软雅黑';
+	font-size:12px;
+}
+#wr_title{
+	display:block;
+	position:relative;
+	top:40px;
+	left:20px;
+	font-family:'微软雅黑';
+	font-size:14px;
+}
+#wr_cont{
+	display:block;
+	position:relative;
+	top:10px;
+	font-family:'微软雅黑';
+	font-size:12px;
+}
+.workitem{
+	display:block;
+	position:relative;
+	margin-top:5px;
+	margin-bottom:10px;
+	width:auto;
+}
+#div_author{
+	display:block;
+	position:relative;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+#lowbutt{
+	display:block;
+	position:relative;
+	margin-top:25px;
+	text-align:center;
+}
+.title_butt{
+	display:block;
+	position:relative;
+	font-family:'微软雅黑';	
+	font-size: 14px;
+	color:#FFFFFF;
+	background-color: rgba(206,247,255,0.2);
+	border:1px solid #CEF7FF;
+	border-radius:10px;
+	margin-top:20px;
+	width:90%;
+	height:30px;
+}
+.butt_page{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	background-color: #C8CDF3;
+	border:1px solid #295669;
+	border-radius:10px;
+	width:70px;
+	height:20px;
+}
+#pages span{
+
+}
+.popwindow{
+	display:none;
+	position:absolute;
+	z-index:5;
+}
+#newWR_panel{
+	top:25%;
+	left:36%;
+	width:350px;
+	height:240px;
+	background-color:#FFFFFF;
+	border:1px solid #295669;
+	border-radius:10px;
+}
+.popw_head{
+	display:block;
+	position:relative;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	background-color: #295669;
+	font-family:'微软雅黑';	
+	font-size: 14px;
+	height:35px;
+	line-height:35px;
+	padding-left:10px;
+	color:#FFFFFF;
+}
+.popw_body{
+	display:block;
+	position:relative;
+	padding:10px;
+	padding-left:20px;
+	padding-right:20px;
+}
+.textline{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	line-height:35px;
+}
+#releasewr{
+	display:none;
+}
+#author_2{
+	background-color:#FFFFFF;
+	border:0;	
+}
+textarea.items{
+	width:510px;
+}
+textarea.items1{
+	width:133px;
+}
+textarea.issue{
+	width:191px;
+}
+.items{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	line-height:25px;
+	padding-left:5px;
+	padding-right:5px;
+	width:
+}
+.items1{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	line-height:25px;
+	padding-right:5px;
+}
+.issue{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	line-height:25px;
+	padding-left:5px;
+	padding-right:5px;
+}
+.itemno{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	padding-top:2.5px;
+	width:12px;
+}
+.itemno1{
+	font-family:'微软雅黑';	
+	font-size: 12px;
+	width:12px;
+}
+#edit_wr{
+	display:none;
+}
+#save_wr{
+	display:none;
+}
+#canceledit_wr{
+	display:none;
+}
+.wrlist_bgcolor1{
+	background-color:#E5F3FC;
+}

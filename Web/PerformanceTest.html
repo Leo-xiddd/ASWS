@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TMS&nbsp;测试工作流管理系统</title>
+	<link rel="stylesheet" type="text/css" href="css/TPlist.css">
+</head>
+
+<body style="margin:0;border:0;">
+	<div class="box_title">
+		<table cellspacing="0" cellpadding="0"><tbody><tr>
+			<td width=99%><span id="proj_lable"></span>项目测试记录</td>
+			<td><button id="tpsumm_fold">—</button></td>
+		</tr></tbody></table>		
+	</div>
+	<div id="TPsumm" class="linebox">
+		<table id="frm_tasklist" width=100% cellspacing="0" cellpadding="0"><tbody><tr>
+			<td valign="top" width=60%>
+				<div style="padding-left:5px;"><button id="butt_DCL" class="head_butt_thin left">DCL</button><button id="butt_DQS" class="head_butt_thin right">DQS</button></div>
+				<div id="TPchart"></div>
+			</td>
+			<td valign="top">			
+				<div>
+					<table cellspacing="0" cellpadding="0" width=520px class="table_subtest" style="margin-right:10px;margin-right:15px;margin-top:10px"><tbody>					
+						<th class="sthead" width=11%>版本</th>
+						<th class="sthead" width=18%>开始时间</th>
+						<th class="sthead" width=18%>结束时间</th>
+						<th class="sthead" width=14%>测试状态</th>
+						<th class="sthead" width=14%>测试周期</th>
+						<th class="sthead" width=11%>轮数</th>
+						<th class="sthead" width=17%>操作</th>
+						</tr>
+					</tbody></table>
+					<iframe id="subtest" width=100% height="205px" src="subtest.html" frameborder=0></iframe>
+				</div>
+			</td>
+		</tr></tbody></table>
+	</div>
+	<br>
+	<header>
+		<div>
+		<table width=100%>
+		<tbody>
+		<tr>
+			<td width=52%>
+				<button id="butt_currt" class="head_butt left">当前在测项目</button><button id="butt_hist" class="head_butt right">历史项目记录</button>
+			</td>
+			<td>
+				<button class="head_butt left rr" href="javascript:void(0)" onclick="addTL()">产品线管理</button>
+			</td>
+			<td>
+				<button class="head_butt left rr" href="javascript:void(0)" onclick="openTP('new')">添加项目</button>
+			</td>
+			<td>
+				<button id="closeTP" class="head_butt left rr">关闭项目</button>
+			</td>
+			<td>
+				<button id="butt_addsb" class="head_butt left rr">项目提测</button>
+			</td>
+			<td>
+				<button id="butt_checksb" class="head_butt left rr">提测记录</button>
+			</td>
+		</tr>
+		</tbody>
+		</table>
+		</div>
+	</header>
+	
+	<div class="TPlist">
+		<table id="tb_tplist" width=100% cellspacing="0" cellpadding="0">		
+		<thead class="thead">
+			<th class="cell" width=30 height=25>No.</th>
+			<th class="cell" width=140>项目</th>
+			<th class="cell" width=45>版本号</th>
+			<th class="cell" width=65>产品经理</th>
+			<th class="cell" width=65>测试经理</th>
+			<th class="cell" width=45>优先级</th>
+			<th class="cell" width=85>期望开始时间</th>
+			<th class="cell" width=85>实际开始时间</th>
+			<th class="cell" width=65>项目状态</th>
+			<th class="cell" width=65>测试状态</th>
+			<th class="cell" width=65>测试周期</th>
+			<th class="cell" width=35>轮数</th>			
+		</thead>
+		<tbody id="tab_tp list">	
+		</tbody>
+		</table>
+		<div id="pages" style="text-align:right;font-family:'微软雅黑';font-size:12px;margin-top:10px">
+			<button id="Fir_page" href="javascript:void(0)" onclick="Topage(1)" class="butt_page">首&nbsp;页</button>
+			<button id="Pre_page" href="javascript:void(0)" onclick="Nextpage('-')" class="butt_page">上一页</button>
+			<span>第<span id="curr_page">1</span>页，共<span id="page_num">1</span>页&nbsp;</span>
+			<button id="Next_page" href="javascript:void(0)" onclick="Nextpage('+')" class="butt_page">下一页</button>
+			<button id="Las_page" href="javascript:void(0)" onclick="Topage(0)" class="butt_page">尾&nbsp;页</button>
+		</div>
+	</div>
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>
+	<!--弹层：打开测试报告前的选择-->
+	<div id="endtest" class="popupwindow">
+		<p id="endtest_head" class="close"><a href="javascript:void(0)" onclick="close_endtest()">关闭</a></p> 
+		<div class="popbody">		
+			<div class="pop_text">请选择测试结果</div>
+			<div id="pop_ratios">
+			<input class="ra_butt_reject" type="radio"/>测试驳回
+			<input class="ra_butt_fail" type="radio"/>测试不通过
+			<input class="ra_butt_pass" type="radio"/>测试通过
+			<span id="endtest_ST_index" class="noshow"></span><span id="endtest_tes" class="noshow"></span><span id="endtest_sttime" class="noshow"></span>
+			</div>
+		</div>
+	</div>
+	
+	<!--弹层：产品线管理-->
+	<div id="PL" class="popupwindow PL">
+		<div class="pl_title">产品线管理</div>
+		<div class="pl_box formbody">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>		
+			<tr height="45px">
+				<td width="200px">
+					<label for="pls">已有产品线：</label>
+					<select id="pls" multiple="multiple" size="6" style="width:150px">
+					</select>
+				</td>
+				<td width="100px" valign="top">
+					<div align="center" style="padding-top:24px;">
+					<button id="addpl">添加</button></br></br>
+					<button id="delpl">删除</button></br></br>
+					<button id="closepl">关闭</button>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<!--弹层：测试项目-->
+	<div id="newTP" class="popupwindow newTP">
+		<div class="newtp_title">添加新的测试项目</div>
+		<div class="newtp_box formbody">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>		
+			<tr height="45px">
+				<td width="88px">项目名称：</td>
+				<td width="170px"><input id="Proj_Name" type="text" class="inputbox newtprw" style="width:150px;"/></td>
+				<td width="80px">项目版本：</td>
+				<td width="82px"><input id="Proj_Version" type="text" class="inputbox newtprw" style="width:80px;"/></td>
+			</tr>
+			<tr height="45px">
+				<td>期望测试时间：</td>
+				<td><input type="date" id="Expect_StartTime" class="inputbox newtprw" style="width:150px;"/></td>	
+				<td>项目优先级：</td>
+				<td><input id="Proj_Priority" style="width:80px;"></input>
+				</td>					
+			</tr>
+			<tr height="45px">
+				<td>实际开始时间：</td>
+				<td><input type="date" id="Fact_StartTime" class="inputbox newtprw" readonly=true style="width:150px;background-color:#DDD"/></td>
+				<td>产品经理：</td>
+				<td><select id="Proj_Manager" class="inputbox" style="width:80px;"></select></td>
+			</tr>
+			<tr height="45px">
+				<td>归属产品线：</td>
+				<td><select id="productline" style="width:150px;">
+				</select></td>
+				<td>测试负责人：</td>
+				<td ><select id="Test_Manager" style="width:80px;"></select></td>
+			</tr>
+			<tr height="45px">
+				<td>测试工程师：</td>
+				<td colspan=3><input id="Test_Engineer" type="text" class="inputbox newtprw" style="width:330px;"/></td>
+			</tr>
+			<tr height="45px">
+				<td>其他相关人员：</td>
+				<td colspan=3><input id="Others" type="text" class="inputbox newtprw" style="width:330px;"/></td>
+			</tr>
+			<tr height="30px">
+				<td><img src="img/del.png" id="btnDel" width="35" height="35" title="删除项目"/></td>
+				<td colspan=3 align="right" style="font-size: 12px; font-family: '宋体';">
+					<button id="BugReview">查看Bug记录</button>
+					<button id="btnClose">取消</button>
+					<button id="btnSubmit">提交</button>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!--弹层：提测单-->
+	<div id="newSB" class="popupwindow newSB">
+		<div id="SB_header">
+			<span id="Proj_Name"></span><span id="Proj_Version"></span>项目提测单
+		</div>
+	
+		<div class="sb_formbody" >
+			<div style="width:740px;">
+				<table cellspacing="0" cellpadding="0">
+				<tbody>
+				<tr>               	
+					<td width="65"><b>提测时间：</b></td>
+					<td width="140"><span id="Submittime"></span></td>
+					<td width="50"><b>提测人：</b></td>
+					<td width="40"><a id="Submitter"></a></td>
+					<td width="100"><b>提测版本(</b>必填<b>)：</b></td>
+					<td width="110"><input id="Proj_Subversion" type="text" style="width:80px;"/></td>
+					<td><b>产品经理：</b></td>
+					<td width="100"><select id="sb_Proj_Manager" class="inputbox" style="width:80px;"></select></td>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+			<hr>
+			<table cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td width=370>
+					<div class="sb_note">
+						<div><b>功能描述(</b>必填<b>，限200字)：</b><textarea id="FunctionDes" type="text"></textarea></div>   	
+						<div><b>测试范围建议(</b>必填<b>，限200字)：</b><textarea id="Range" type="text"></textarea></div> 	
+						<div><b>研发工程师：</b>(只有这里指定的工程师才会收到测试报告)</div>
+						<div><input id="Developer" type="text" class="longinput" style="width:332px;"/></div>
+					</div>
+				</td>
+				<td width=220>
+					<div class="sb_note" style="margin-left:10px;width:100%;">
+						<ul>
+							<li><b>UED代码拉取地址(</b>必填<b>)：</b><input id="UED_codeurl" type="text" class="longinput" value="http://git.ctags.cn/***.git"/></li>
+							<li><b>前端代码拉取地址(</b>必填<b>)：</b><input id="front_codeurl" type="text" class="longinput" value="http://git.ctags.cn/***.git"/></li>
+							<li><b>其他代码拉取地址：</b><input id="Other_codeurl" type="text" class="longinput" value="http://git.ctags.cn/***.git"/></li>
+							<li><b>部署文档链接(</b>必填<b>)：</b><textarea id="Wikiurl" type="text"  class="longinput" style="height:48px;vertical-align:top;margin-bottom:0px">http://jw.tech.bitauto.com:8090/pages/viewpage.action?pageId=</textarea></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			</table>			
+			<div style="display: block; position: relative; left: 550px; top: 5px;">
+				<button id="sb_btnClose">取消</button>
+				<button id="sb_btnSubmit">提交</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/pt.js"></script>
+</html>

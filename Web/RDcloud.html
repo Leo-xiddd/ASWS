@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>研发云管理主页</title>
+	<link rel="stylesheet" type="text/css" href="css/RDcloud.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.treeview.css"/>
+</head>
+
+<body>
+	<div id="vm_body">
+		<table id="body_frame" width=100% cellspacing="0" cellpadding="0">
+		<tbody>
+			<tr>
+				<td width=150px valign="top">
+					<div id="treebox">
+						<ul id="treelist" class="filetree">
+						</ul>
+					</div>
+				</td>
+				<td valign="top">
+					<div id="vm_basicinfo">
+						<div>
+							<span id="title_vm_basicinfo">服务器基本信息</span>
+							<img id="ico_addserv" src="img/addvm.jpg" title="添加主机" href="javascript:void(0)" onclick="addServ()">
+							<img id="ico_editserv" src="img/editvm.jpg" title="编辑主机" href="javascript:void(0)" onclick="editServ()">
+							<img id="ico_delserv" src="img/delvm.jpg" title="删除主机" href="javascript:void(0)" onclick="delServ()">
+							<img id="ico_ippool" src="img/ippool.jpg" title="IP池管理" href="javascript:void(0)" onclick="ipman()">
+						</div>
+						<table id="tab_vm_basicinfo" width="97%" cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr>
+								<td>主机名：<span id="hostname"></span></td>
+								<td>IP地址：<span id="ipaddr"></span></td>
+								<td colspan="2">物理位置：<span id="locate"></span></td>
+							</tr>	
+							<tr>
+								<td>序列号：<span id="sn"></span></td>
+								<td>型号：<span id="model"></span></td>
+								<td>资产标签：<span id="asset_sn"></span></td>
+								<td>虚机数量：<span id="vm_num"></span></td>
+							</tr>	
+							<tr>
+								<td>CPU：<span id="cpu"></span></td>
+								<td>已用CPU：<span id="cpu_used"></span></td>
+								<td>剩余CPU：<span id="cpu_usable"></span></td>
+								<td>使用率：<span id="cpu_rate_usage"></span>%</td>
+							</tr>
+							<tr>
+								<td>内存：<span id="mem"></span>G</td>
+								<td>已用内存：<span id="mem_used"></span>G</td>
+								<td>剩余内存：<span id="mem_usable"></span>G</td>
+								<td>使用率：<span id="mem_rate_usage"></span>%</td>
+							</tr>
+							<tr>
+								<td>磁盘：<span id="disk"></span>G</td>
+								<td>已用磁盘：<span id="disk_used"></span>G</td>
+								<td>剩余磁盘：<span id="disk_usable"></span>G</td>
+								<td>使用率：<span id="disk_rate_usage"></span>%</td>
+							</tr>
+						</tbody>
+						</table>
+						<div id="bottom_vm_basicinfo">
+							<table width=100% cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td width="50%">
+									<button class="head_butt" href="javascript:void(0)" onclick="addVM()">添加新虚机</button>
+									<button class="head_butt" href="javascript:void(0)" onclick="editVM()">变更虚机信息</button>
+									<button class="head_butt" href="javascript:void(0)" onclick="delVM()">删除虚拟机</button>
+								</td>
+								<td align="right">
+									<select id="filt_key">
+										<option value="name">虚拟机名称</option>
+										<option value="ip">IP地址</option>
+										<option value="type">类型</option>
+										<option value="user">使用人</option>
+									</select>
+									<input type="text" id="filt_value">
+									<button class="head_butt" href="javascript:void(0)" onclick="findVM()" style="width: 70px;margin-right: 1px;">快速查找</button>
+								</td>
+							</tr></tbody>
+							</table>
+						</div>					
+					</div>
+					<div id="vmlist">
+						<table id="tab_vmlist" width=100% cellspacing="0" cellpadding="0">
+						<thead>
+							<th style="border-left: 0" width="30px">序号</th>
+							<th width="130px">名称</th>
+							<th width="150px">操作系统</th>
+							<th width="30px">CPU</th>
+							<th width="50px">内存(G)</th>
+							<th width="50px">磁盘(G)</th>
+							<th width="90px">IP地址</th>
+							<th>用途</th>
+							<th width="50px">使用人</th>
+							<th width="40px">类型</th>
+						</thead>
+						<tbody id="tb_vmlist">
+						</tbody>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	<div id="top_chats">
+		<div id="title_top_charts">
+			<table width="100%" cellspacing="0" cellpadding="0">
+			<tbody><tr>
+				<td><b>研发云服务器资源状态</b>
+					（<button id="tag_mem"></button>
+					-
+					内存使用率，
+					<button id="tag_disk"></button>
+					-
+					磁盘使用率）
+				</td>
+				<td align="right">
+					<button class="box_fold" href="javascript:void(0)" onclick="toggle_box('#vm_resource_chartgp')"></button>
+				</td>
+			</tr></tbody>
+			
+			</table>
+		</div>
+		<table width="100%" cellspacing="0" cellpadding="0">
+		<tbody id="vm_resource_chartgp">
+			<tr>
+				<td>
+					<div id='title_chart_vm1' class="chart_title"></div>
+					<div id="Chart_usage_vm1" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm2' class="chart_title"></div>
+					<div id="Chart_usage_vm2" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm3' class="chart_title"></div>
+					<div id="Chart_usage_vm3" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm4' class="chart_title"></div>
+					<div id="Chart_usage_vm4" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm5' class="chart_title"></div>
+					<div id="Chart_usage_vm5" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm6' class="chart_title"></div>
+					<div id="Chart_usage_vm6" class="small_chart"></div>
+				</td>											
+				<td>
+					<div id='title_chart_vm7' class="chart_title"></div>
+					<div id="Chart_usage_vm7" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm8' class="chart_title"></div>
+					<div id="Chart_usage_vm8" class="small_chart"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id='title_chart_vm9' class="chart_title"></div>
+					<div id="Chart_usage_vm9" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm10' class="chart_title"></div>
+					<div id="Chart_usage_vm10" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm11' class="chart_title"></div>
+					<div id="Chart_usage_vm12" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm12' class="chart_title"></div>
+					<div id="Chart_usage_vm12" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm13' class="chart_title"></div>
+					<div id="Chart_usage_vm13" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm14' class="chart_title"></div>
+					<div id="Chart_usage_vm14" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm15' class="chart_title"></div>
+					<div id="Chart_usage_vm15" class="small_chart"></div>
+				</td>
+				<td>
+					<div id='title_chart_vm16' class="chart_title"></div>
+					<div id="Chart_usage_vm16" class="small_chart"></div>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>	
+	<!--弹层：新虚拟机-->
+	<div id="VMinfo" class="popupwindow">
+		<div id="VMinfo_title" class="formtitle">虚拟机信息</div>
+		<div class="formbody">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>	
+			<tr>
+				<td align="right">类型：</td>
+				<td><select id="vm_type">
+					<option>研发</option>
+					<option>测试</option>
+					<option>系统</option>
+				</select></td>	
+			</tr>
+			<tr>
+				<td align="right">服务器名：</td>
+				<td><select id="vm_host"></select></td>
+			</tr>
+			<tr>
+				<td align="right">虚拟机名：</td>
+				<td><input id="vm_name"></input></td>
+			</tr>
+			<tr>
+				<td align="right">操作系统：</td>
+				<td><select id="vm_os">
+					<option>Windows Server 2003-64</option>
+					<option>Windows Server 2008-64</option>
+					<option>Windows 2008 R2</option>
+					<option>Windows 7 x64 企业版</option>
+					<option>Windows 7 x86</option>
+					<option>CentOS 6.4-64</option>
+					<option>CentOS 6.5-64</option>
+					<option>CentOS 7-64</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td align="right">IP地址：</td>
+				<td><input id="vm_ip"></input></td>
+			</tr>
+			<tr>
+				<td align="right">vcpu：</td>
+				<td><input id="vm_cpu"></input></td>
+			</tr>
+			<tr>
+				<td align="right">内存：</td>
+				<td><input id="vm_mem"></input>G</td>
+			</tr>
+			<tr>
+				<td align="right">磁盘：</td>
+				<td><input id="vm_disk"></input>G</td>
+			</tr>
+			<tr>
+				<td align="right">使用人：</td>
+				<td><input id="vm_user"></input></td>
+			</tr>
+			<tr>
+				<td align="right">用途：</td>
+				<td><input id="vm_des"></input></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button href="javascript:void(0)" onclick="VM_save()" id="save_butt" data-value="AddVM">保存</button>
+					<button href="javascript:void(0)" onclick="CloseForm('#VMinfo','#overlay')">关闭</button>
+				</td>				
+			</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	<!--弹层：新主机-->
+	<div id="Servinfo" class="popupwindow">
+		<div id="Servinfo_title" class="formtitle">服务器信息</div>
+		<div class="formbody">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>	
+			<tr>
+				<td align="right">主机名：</td>
+				<td width="150px"><input id="popform_hostname"></input></td>
+			</tr>
+			<tr>
+				<td align="right">IP地址：</td>
+				<td><input id="popform_ipaddr"></input></td>
+			</tr>
+			<tr>	
+				<td align="right">型号：</td>
+				<td><input id="popform_model"></input></td>
+			</tr>
+			<tr>
+				<td align="right">物理位置：</td>
+				<td><input id="popform_locate" style="width: 200px;"></input></td>
+			</tr>
+			<tr>
+				<td align="right">序列号：</td>
+				<td><input id="popform_sn"></input></td>
+			</tr>
+			<tr>
+				<td align="right">资产标签：</td>
+				<td><input id="popform_asset_sn"></input></td>
+			</tr>		
+			<tr>
+				<td align="right">CPU数：</td>
+				<td><input id="popform_cpu"></input></td>
+			</tr>
+			<tr>
+				<td align="right">内存：</td>
+				<td><input id="popform_mem"></input>G</td>
+			</tr>
+			<tr>
+				<td align="right">磁盘：</td>
+				<td><input id="popform_disk"></input>G</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button href="javascript:void(0)" onclick="Serv_save()" id="save_butt_serv" data-value="AddServ">保存</button>
+					<button href="javascript:void(0)" onclick="CloseForm('#Servinfo','#overlay')">关闭</button>
+				</td>				
+			</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- 弹层-ip池管理 -->
+	<div id="form_ip" class="popupwindow">
+		<div id="form_ip_title" class="formtitle">研发云IP地址管理</div>
+		<div class="formbody">
+			<table id="form_ip_head" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td colspan="2">网络：<select id="net"><option>192.168.55.0</option><option>192.168.56.0</option></select></td>
+					<td colspan="2"><button href="javascript:void(0)" onclick="AddNetwork()">添加新网络</button></td>
+				</tr>
+				<tr style="height:25px">
+					<td class="title_tab" width="60px">网段</td>
+					<td class="title_tab" width="110px">IP</td>
+					<td class="title_tab" width="60px">状态</td>
+					<td class="title_tab" width="150px">说明</td>
+				</tr>
+			</tbody>
+			</table>
+			<div id="iplist">
+				<table cellspacing="0" cellpadding="0">
+				<col width="60px">
+				<col width="110px">
+				<col width="60px">
+				<col width="150px">
+				<tbody id="tbody_iplist">
+					<tr>
+						<td>55</td>
+						<td>192.168.55.123</td>
+						<td>已使用</td>
+						<td>网关</td>
+					</tr>
+					<tr>
+						<td>55</td>
+						<td>192.168.55.123</td>
+						<td>已使用</td>
+						<td>JZGG-1231212121212</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+			<div class="form_bottom">
+				<button href="javascript:void(0)" onclick="CloseForm('#form_ip','#overlay')">关闭</button>
+			</div>
+		</div>
+	</div>
+	<!-- 弹层-虚拟机快速搜索结果 -->
+	<div id="form_findvm" class="popupwindow">
+		<div id="form_findvm_title" class="formtitle">虚拟机快速搜索结果</div>
+		<div class="formbody">
+			<div id="findvm_nuum"></div>
+			<table id="form_findvm_head" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr style="height:25px">
+					<td class="title_tab" width="60px">主机</td>
+					<td class="title_tab" width="130px">虚拟机</td>
+					<td class="title_tab" width="90px">IP地址</td>
+					<td class="title_tab" width="160px">操作系统</td>
+					<td class="title_tab" width="30px">CPU</td>
+					<td class="title_tab" width="50px">内存(G)</td>
+					<td class="title_tab" width="50px">磁盘(G)</td>
+					<td class="title_tab" width="300px">用途</td>
+					<td class="title_tab" width="50px">使用人</td>
+					<td class="title_tab" width="40px">类型</td>
+				</tr>
+			</tbody>
+			</table>
+			<div id="findvmlist">
+				<table cellspacing="0" cellpadding="0">
+				<col width="60px">
+				<col width="131px">
+				<col width="91px">
+				<col width="161px">
+				<col width="31px">
+				<col width="51px">
+				<col width="51px">
+				<col width="301px">
+				<col width="51px">
+				<col width="41px">
+				<tbody id="tbody_findvmlist">
+				</tbody>
+				</table>
+			</div>
+			<div class="form_bottom">
+				<button href="javascript:void(0)" onclick="CloseForm('#form_findvm','#overlay')">关闭</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/jquery.treeview.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/buildchart.js"></script>
+<script type="text/javascript" src="js/RDcloud.js"></script>
+</html>

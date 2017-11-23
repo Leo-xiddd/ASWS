@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>权限管理</title>
+	<link rel="stylesheet" type="text/css" href="css/Purview.css">
+</head>
+
+<body>
+	<div id="container">
+	<table width="100%" cellspacing="0" cellpadding="0">
+	<tbody><tr>
+		<td width="30%" valign="top">
+			<header style="padding-left: 0">
+				<select id="filt_key">
+					<option value="usrname">账号</option>
+					<option value="fullname">用户名</option>
+				</select>
+				<input type="text" id="filt_value">
+				<button class="head_butt" href="javascript:void(0)" onclick="findusr()">快速查找</button>
+			</header>
+			<table id="thead_usrlist" width="95.5%" cellspacing="0" cellpadding="0">
+			<thead>
+				<th width="99px">账号</th>
+				<th width="129px">用户名</th>
+				<th style="border-right: 0">部门</th>
+			</thead>
+			</table>
+			<div id="usrlist">
+				<table id="tab_usrlist" width="100%" cellspacing="0" cellpadding="0">
+				<col width="100px">
+				<col width="130px">
+				<tbody id="tbody_usrlist">
+					<tr>
+						<td>admin</td>
+						<td>系统管理员</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>liuxl</td>
+						<td>刘晓丽</td>
+						<td>综合管理部</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</td>
+		<td width="70%" valign="top">
+			<!--功能按钮-->
+			<header>
+				<button class="head_butt" href="javascript:void(0)" onclick="InitConf()">初始化权限表</button>	
+				<button class="head_butt" href="javascript:void(0)" onclick="SaveConf()">保存修改</button>
+				<button class="head_butt" href="javascript:void(0)" onclick="SelectAll()">选择全部</button>
+				<button class="head_butt" href="javascript:void(0)" onclick="ClearAll()">清除全部</button>
+			</header>
+			<div id="purviewlist">
+			<table id="tab_purviewlist" width="97%" cellspacing="0" cellpadding="0">
+				<tbody id="tbody_purviewlist">
+					<tr>
+						<td colspan="7"><div class="module_title">工作周报</div></td>
+					</tr>
+					<tr>						
+						<td><input type="checkbox" id="weekreport_Page_Access">页面访问</td>
+						<td><input type="checkbox" id="weekreport_AddTWR">创建团队周报</td>
+						<td><input type="checkbox" id="weekreport_CheckTWR">查看团队周报</td>
+						<td><input type="checkbox" id="weekreport_RemoveTWR">删除团队周报</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">研发云</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="RDcloud_Page_Access">页面访问</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">需求管理</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="ReqMan_Page_Access">页面访问</td>
+						<td><input type="checkbox" id="ReqMan_Add">创建需求</td>
+						<td><input type="checkbox" id="ReqMan_Del">删除需求</td>
+						<td><input type="checkbox" id="ReqMan_Import">导出需求</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">项目管理</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="projlist_Page_Access">页面访问</td>
+						<td><input type="checkbox" id="projlist_ProductLine">产品线管理</td>
+						<td><input type="checkbox" id="projlist_Product">产品管理</td>
+						<td><input type="checkbox" id="projlist_AddProj">创建项目</td>
+						<td><input type="checkbox" id="projlist_UpdateProj">项目变更</td>
+						<td><input type="checkbox" id="projlist_CloseProj">关闭项目</td>
+						<td><input type="checkbox" id="projlist_DelProj">删除项目</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="projlist_ApprovProj">项目审批</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">功能测试</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="TP_list_Page_Access">页面访问</td>
+						<td><input type="checkbox" id="TP_list_Addtp">创建测试项目</td>
+						<td><input type="checkbox" id="TP_list_Closetp">关闭测试项目</td>
+						<td><input type="checkbox" id="TP_list_Submit">项目提测</td>
+						<td><input type="checkbox" id="TP_list_CheckSubmit">查看提测</td>
+						<td><input type="checkbox" id="TP_list_ApprovSubmit">提测审核</td>
+						<td><input type="checkbox" id="TP_list_AddTR">创建测试报告</td>
+					</tr>
+					<tr>	
+						<td><input type="checkbox" id="TP_list_ApprovTR">审核测试报告</td>
+						<td><input type="checkbox" id="TP_list_CheckTR">查看测试报告</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">测试实施</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="TestExce_Page_Access">页面访问</td>
+						<td><input type="checkbox" id="TestExce_Contractor">实习生管理</td>
+						<td><input type="checkbox" id="TestExce_Attendee">考勤数据编辑</td>
+						<td><input type="checkbox" id="TestExce_AddTask">创建任务</td>
+						<td><input type="checkbox" id="TestExce_UpdateTask">修改任务</td>
+						<td><input type="checkbox" id="TestExce_DelTask">删除任务</td>
+						<td><input type="checkbox" id="TestExce_ManReq">实习生需求数据编辑</td>
+					</tr>
+					<tr>	
+						<td><input type="checkbox" id="TestExce_AddDlog">填写日志</td>
+						<td><input type="checkbox" id="TestExce_UpdateDlog">修改日志</td>
+						<td><input type="checkbox" id="TestExce_DelDlog">删除日志</td>
+						<td><input type="checkbox" id="TestExce_ImportDlog">导出日志</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">质量审计</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="PQR_Page_Access">页面访问</td>
+						<td><input type="checkbox" id="PQR_Add">创建质量报告</td>
+						<td><input type="checkbox" id="PQR_Del">删除质量报告</td>
+						<td><input type="checkbox" id="PQR_Import">导出质量报告</td>			
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">日志分析工具</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="Log_verify_Page_Access">页面访问</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">性能测试</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="PerformanceTest_Page_Access">页面访问</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">用户管理</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="UsrMange_Page_Access">页面访问</td>
+					</tr>
+					<tr>
+						<td colspan="7"><div class="module_title">权限管理</div></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" id="Purview_Page_Access">页面访问</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</td>
+	</tr></tbody>
+	</table>					
+	</div><!--用于结束container-->
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/Purview.js"></script>
+</html>

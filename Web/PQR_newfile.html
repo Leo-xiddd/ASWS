@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>质量报告</title>
+	<link rel="stylesheet" type="text/css" href="css/PQRfile.css">	
+</head>
+
+<body style="margin:0">	
+	<div class="container">
+		<table cellpadding="0" border="0" width=100%>
+		<tbody>
+			<tr>
+				<td width=86%>
+					<div id="title"></div>
+				</td>
+				<td>
+					<div class="pqrfile_butt top" align="right">
+						<button id="butt_cancel">取消</button>
+						<button id="butt_save">保存</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		</table>				
+		<hr>  
+		<div class="pqr_file_note">
+			<span>注：本报告为<span class="pqr_period"></span>报告，数据来源自</span>
+			<span id="pqr_st"></span><span>起至</span><span id="pqr_et"></span>
+			<span>止，此日期之前的Bug将不计入报告.</span>
+		</div>
+		<div class="chapter_title" style="margin-top:2px;">
+			<table cellpadding="0" border="0" width=100%>
+				<tr>
+					<td>
+						<span>本<span class="pqr_period"></span>质量概览</span>
+					</td>
+					<td align="right">
+						<button class="butt_slid"/>—</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="chapter">
+			<div>
+				<label for="QualRisk">本<span class="pqr_period"></span>需关注的质量风险如下：</label>
+				<textarea id="QualRisk" type="text" style="height:100px;"></textarea>
+			</div>
+			<div class="table" id="Summ_table">
+				<label for="Summ_table_body">本<span class="pqr_period"></span>概要质量指标如下表：</label>
+				<table cellpadding="0" cellspacing="0" width=100%>
+					<thead>
+					<tr>
+						<th>产品线</th>
+						<th>提测版本</th>
+						<th>通过版本</th>
+						<th>Bug总数</th>
+						<th>解决Bug数</th>					
+						<th>待解决Bug</th>													
+						<th>版本通过率(%)</th>
+						<th>Bug解决率(%)</th>		
+						<th>产品质量指数PQI</th>
+					</tr>
+					</thead>
+				<tbody id="Summ_table_body">	
+				</tbody>
+				</table>
+			</div>
+			<!--PQI变化趋势图-->
+			<div id="chart_pqi_back" class="chart">
+				<div id="chart_pqi"></div>
+			</div>
+		</div>
+		
+		<div class="chapter_title">
+			<table cellpadding="0" border="0" width=100%>
+				<tr>
+					<td>
+						<span>本<span class="pqr_period"></span>产品质量状态分析</span>
+					</td>
+					<td align="right">
+						<button class="butt_slid"/>—</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="chapter">
+			<table cellpadding="0" cellspacing="0" border="0" width=100%><tr>
+				<td width=50% valign="top">
+					<div id="test_time">								
+						<div class="chapter_title_plus"><b>产品测试周期控制</b></div>
+						<div class="text">
+							<span>本<span id="pqr_period_value" class="pqr_period"></span>平均测试轮数为<span class="curr_aver_cycles"></span>轮，平均测试周期是<span class="curr_aver_timecost"></span>天<span id="toler_aver_timecost_hide">，较上<span class="pqr_period"></span><span id="toler_aver_timecost"></span>%</span>。</span></br>
+							<span>本<span class="pqr_period"></span>共<span class="reject_version"></span>个测试版本被驳回。</span>
+						</div>
+						<!--测试周期月度分布图-->
+						<div class="chart" Style="margin-top:10px;">
+							<div id="chart_tpd"></div>
+						</div>
+						<div class="table" id="Testtimecontr_table">
+							<table cellpadding="1" cellspacing="0" width=100%>
+							<thead> 
+								<tr>
+									<th>平均测试轮数</th>
+									<th>平均测试周期</th>
+									<th>驳回版本</th>
+									<th>未测上线版本</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span class="curr_aver_cycles"></span></td>
+									<td><span class="curr_aver_timecost"></span></td>
+									<td><span class="reject_version"></span></td>
+									<td><input id="onlinever_untest" type="text" required="required" class="inputcell"/></td>
+								</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>
+				</td>
+				<td width=50% valign="top">
+					<div id="bug_distrib" Style="margin-left:10px;">
+						<div class="chapter_title_plus"><b>Bug分布状态分析</b></div>
+						<div class="text">
+							<span>本<span class="pqr_period"></span>人均Bug数<span class="aver_bugnum"></span>个<span id="toler_aver_bugnum_hide">，较上<span class="pqr_period"></span><span id="toler_aver_bugnum"></span>%</span>。</span></br>
+							<span>严重Bug（4、5级）占比<span id="rate_bug_l45"></span>%<span id="toler_bug_l45_hide">，较上<span class="pqr_period"></span><span id="toler_bug_l45"></span>个百分点。</span>
+						</div>
+						<!--Bug严重程度分布图-->
+						<div id="chart_bsd_back" class="chart" Style="margin-top:10px;">
+							<div id="chart_bsd"></div>
+						</div>
+						<div class="table">
+							<table cellpadding="1" cellspacing="0" width=100%>
+							<thead>
+								<tr>
+									<th width=16%>开发人数</th>
+									<th width=16%>Bug总数</th>
+									<th width=16%>人均Bug</th>
+									<th>L1</th>
+									<th>L2</th>
+									<th>L3</th>
+									<th>L4</th>
+									<th>L5</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input id="dev_num" type="text" required="required" class="inputcell"/></td>
+									<td><span id="sum_bugnum"></span></td>
+									<td><span class="aver_bugnum"></span></td>
+									<td><input id="L1_bugnum" type="text" required="required" class="inputcell"/></td>
+									<td><input id="L2_bugnum" type="text" required="required" class="inputcell"/></td>
+									<td><input id="L3_bugnum" type="text" required="required" class="inputcell"/></td>
+									<td><input id="L4_bugnum" type="text" required="required" class="inputcell"/></td>
+									<td><input id="L5_bugnum" type="text" required="required" class="inputcell"/></td>
+								</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>	
+				</td>
+				</tr>
+			</table>		
+		</div>		
+		<div class="chapter_title">
+			<table cellpadding="0" border="0" width=100%>
+				<tr>
+					<td>
+						<span>本<span class="pqr_period"></span>测试项目质量数据对比</span>
+					</td>
+					<td align="right">
+						<button class="butt_slid"/>—</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="chapter">
+			<table class="" cellpadding="0" cellspacing="0" border="0" width=100%>
+					<tr>
+						<td width=50%>
+							<!--项目测试进度图-->
+							<div class="chapter_title_plus"><b>项目测试进度</b></div>
+							<div class="text" Style="padding-left:1em;">
+								<span>项目当前已进行的回归次数与测试通过所需回归次数(经验值)的比较。</span>
+							</div>
+							<div class="chart chart_online left top">
+								<div id="chart_intest_tpd" class="chart_online_height"></div>
+							</div>
+						</td>
+						<td>
+							<!--项目可上线状态图-->
+							<div class="chapter_title_plus" Style="margin-left:20px;"><b>项目可上线状态</b></div>
+							<div class="text"  Style="margin-left:20px;padding-left:1em;">
+								<span>DQS是反映项目质量水平是否达到上线标准（3）的指标。</span>
+							</div>
+							<div class="chart chart_online top">
+								<div id="chart_intest_bsd" class="chart_online_height"></div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width=50%>
+							<!--项目Bug重开率图-->
+							<div class="chapter_title_plus" Style="margin-top:10px;"><b>Bug修复效率</b></div>
+							<div class="text" Style="padding-left:1em;">
+								<span>Bug重复被打开的次数与Bug总数的比率反映了项目修复Bug的效率。</span>
+							</div>
+							<div class="chart chart_online left">
+								<div id="chart_intest_brd" class="chart_online_height"></div>
+							</div>
+						</td>
+						<td>
+							<!--项目遗留Bug分布图-->
+							<div class="chapter_title_plus" Style="margin-left:20px;margin-top:10px;"><b>项目待处理问题状态</b></div>
+							<div class="text"  Style="margin-left:20px;padding-left:1em;">
+								<span>未关闭的Bug数反映了项目仍未解决问题数量。</span>
+							</div>
+							<div class="chart chart_online">
+								<div id="chart_intest_bld" class="chart_online_height"></div>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div class="table" id="intest_proj_table">
+					<table cellpadding="1" cellspacing="0" width=100%>
+					<thead>
+						<tr>
+							<th>项目</th>
+							<th>测试轮数</th>
+							<th>用例通过率(%)</th>
+							<th>Bug总数</th>
+							<th>Bug重开率(%)</th>
+							<th>未关闭Bug数</th>
+							<th>当前版本</th>
+							<th>产品经理</th>
+						</tr>
+					</thead>
+					<tbody id="intest_proj_table_body">
+					</tbody>
+					</table>
+				</div>
+		</div>
+	</div>
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>
+	<!--弹层：等候处理-->
+	<div id="wait" class="popupwindow wait">
+		<div align="center" Style="padding-top:10px;"><img src="img/2qw.gif" width="171" height="113"/></div>
+		<div Style="margin-top:20px;text-align:center;line-height:25px;"><span id="blank_note" class="blank_note">正在紧锣密鼓的收集数据以创建质量报告中，<br>请稍后......</span></div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/pqr_file.js"></script>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>项目管理主页</title>
+	<link rel="stylesheet" type="text/css" href="css/projlist.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.treeview.css"/>
+</head>
+
+<body style="margin:0;border:0;">
+	<header>
+		<div>
+		<table width=100%>
+		<tbody>
+		<tr>
+			<td width=220px>
+				<button id="proj_list" class="head_butt left">项目列表</button><button id="proj_todo" class="head_butt right">待审批项目</button>
+			</td>
+			<td width=20px>
+				<img src="img/trview.png" id="proj_view" class="proj_view" width="20" height="20" title="列表视图" style="margin-top:5px;"/>
+			</td>	
+			<td width=20%>
+				<span id="proj_view_text" class="proj_view" style="font-family:'微软雅黑';font-size:12px;">切换到树型视图</span>
+			</td>
+			<td>
+				<button class="head_butt left rr" href="javascript:void(0)" onclick="PLman()">产品线管理</button>
+			</td>
+			<td>
+				<button class="head_butt left rr" href="javascript:void(0)" onclick="Prodman()">产品管理</button>
+			</td>
+			<td>
+				<button class="head_butt left rr" href="javascript:void(0)" onclick="AddNewProj()">申请新项目</button>
+			</td>
+			<td>
+				<button id="Butt_ProjUpdate" class="head_butt left rr">项目变更</button>
+			</td>
+			<td>
+				<button id="Butt_ProjClose" class="head_butt left rr">关闭项目</button>
+			</td>
+			<td>
+				<button id="Butt_ProjDel" class="head_butt left rr">删除项目</button>
+			</td>
+		</tr>
+		</tbody>
+		</table>
+		</div>
+	</header>
+	
+	<div class="Projlist">
+		<table id="tb_projlist" width=100% cellspacing="0" cellpadding="0">		
+		<thead class="thead">
+			<th class="cell" width=16 height=25>No.</th>
+			<th class="cell" width=100>项目</th>
+			<th class="cell" width=55>产品线</th>
+			<th class="cell" width=110>产品</th>
+			<th class="cell" width=25>来源</th>
+			<th class="cell" width=35>状态</th>
+			<th class="cell" width=35>核准人</th>
+			<th class="cell" width=35>优先级</th>
+			<th class="cell" width=55>开始时间</th>
+			<th class="cell" width=55>计划结束时间</th>
+			<th class="cell" width=65>Git项目空间</th>
+			<th class="cell" width=35>负责人</th>
+			<th class="cell" width=35>产品经理</th>			
+		</thead>
+		<tbody id="tab_projlist">
+		</tbody>
+		</table>
+		<div id="pages" style="text-align:right;font-family:'微软雅黑';font-size:12px;margin-top:10px">
+			<table width="100%" cellspacing="0" cellpadding="0" style="font-family:'微软雅黑';font-size: 12px;"><tbody><tr>
+			<td width="300px">
+				<select id="phase" type="text">
+					<option selected=true value="proj_id">项目编号</option>
+					<option value="proj_name">项目名</option>
+					<option value="product_line">产品线</option>
+					<option value="product">产品</option>
+					<option value="customer">项目来源</option>
+					<option value="proj_status">状态</option>
+					<option value="priority">优先级</option>
+					<option value="start_time">开始时间</option>
+					<option value="plan_end_time">结束时间</option>
+					<option value="responsor">负责人</option>
+					<option value="pm">产品经理</option>
+				</select>
+				<input id="filter" type="text"/>
+				<button id="find" class="module_butt" href="javascript:void(0)" onclick="filte_proj()">查找</button>
+			</td>
+			<td width="41px">
+				<img src="img/download.png" width="20" height="20" title="下载文件" style="margin-left:20px;" href="javascript:void(0)" onclick="downloadfile()"/>
+			</td>
+			<td width="90px">
+				<span>导出结果到本地</span>
+			</td>
+			<td align='right'>
+				<button id="Fir_page" href="javascript:void(0)" onclick="Topage(1)" class="butt_page">首&nbsp;页</button>
+				<button id="Pre_page" href="javascript:void(0)" onclick="Nextpage('-')" class="butt_page">上一页</button>
+				<span>第<span id="curr_page">1</span>页，共<span id="page_num">1</span>页&nbsp;</span>
+				<button id="Next_page" href="javascript:void(0)" onclick="Nextpage('+')" class="butt_page">下一页</button>
+				<button id="Las_page" href="javascript:void(0)" onclick="Topage(0)" class="butt_page">尾&nbsp;页</button>
+			</td>
+			</tr></tbody></table>
+		</div>
+	</div>
+	
+	<div class="ProjTreeview">
+		<hr style="border:1.2px solid #09867D;">
+		<table id="tb_projtv" width=100% cellspacing="0" cellpadding="0">
+		<tbody><tr>
+		<td width=280px>
+			<div id="treebox">
+				<ul id="treelist" class="filetree">
+				</ul>
+			</div>
+		</td>
+		<td valign=top>
+			<div class="box_title">
+				<table cellspacing="0" cellpadding="0" width=100%><tbody><tr>
+					<td width=60%><span id="trview_proj_name" class="tv_blank"></span>项目信息</td>
+					<td align=right>项目编号：<span id="trview_proj_id" class="tv_blank"></span></td>
+				</tr></tbody></table>		
+			</div>		
+			<div class="linebox infobox">
+				<div id="projinfo">
+					<table id="pinfo" width=100% cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td width=25%>
+								<span><b>项目来源：</b></span>
+								<span id="trview_customer" class="tv_blank"></span>
+							</td>
+							<td width=25%>
+								<span><b>产品经理：</b></span>
+								<span id="trview_pm" class="tv_blank"></span>
+							</td>
+							<td width=25%>
+								<span><b>项目优先级：</b></span>
+								<span id="trview_priority" class="tv_blank"></span>
+							</td>
+							<td width=25%>
+								<span><b>项目批准人：</b></span>
+								<span id="trview_approver" class="tv_blank"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span><b>项目负责人：</b></span>
+								<span id="trview_responsor" class="tv_blank"></span>
+							</td>
+							<td>
+								<span><b>项目开始时间：</b></span>
+								<span id="trview_start_time" class="tv_blank"></span>
+							</td>
+							<td>
+								<span><b>计划结束时间：</b></span>
+								<span id="trview_plan_end_time" class="tv_blank"></span>
+							</td>
+							<td>
+								<span><b>项目状态：</b></span>
+								<span id="trview_status" class="tv_blank"></span>
+							</td>
+						</tr>
+						<tr>						
+							<td colspan=3>
+								<span><b>项目组成员：</b></span>
+								<span id="trview_team_member" class="tv_blank"></span>
+							</td>
+							<td>
+								<span><b>Git代码库：</b></span>
+								<span id="trview_git" class="tv_blank"></span>
+							</td>
+						</tr>
+						<tr style="height:10px;">						
+							<td colspan=4>
+								<hr style="border:1px dotted;">
+							</td>
+						</tr>
+						<tr>						
+							<td colspan=4>
+								<span><b>项目目标：</b></span>
+							</td>
+						</tr>
+						<tr>						
+							<td colspan=4>
+								<div id="trview_goals" class="multi_text tv_blank" style="height:50px;"></div>
+							</td>
+						</tr>
+						<tr>						
+							<td colspan=4>
+								<span><b>项目进展：</b></span>
+							</td>
+						</tr>
+						<tr>						
+							<td colspan=4>
+								<div id="trview_comments" class="multi_text tv_blank" style="height:120px;"></div>
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+			</div>			
+		</td>
+		</tr></tbody>
+		</table>
+	</div>
+	<div class="Proj_toAppro">
+		<table id="tb_projtoAppr" width=100% cellspacing="0" cellpadding="0">		
+		<thead class="thead_grey">
+			<th class="cell" width=12 height=25>No.</th>
+			<th class="cell" width=55>产品线</th>			
+			<th class="cell" width=80>产品</th>
+			<th class="cell" width=25>来源</th>
+			<th class="cell" width=100>项目</th>
+			<th class="cell" width=35>优先级</th>
+			<th class="cell" width=50>计划结束时间</th>
+			<th class="cell" width=35>负责人</th>
+			<th class="cell" width=35>产品经理</th>	
+			<th class="cell" width=35>状态</th>
+			<th class="cell" width=35>核准人</th>				
+			<th class="cell" width=40></th>
+			<th class="cell" width=55></th>
+		</thead>
+		</table>
+	</div>
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>
+	
+	<!--弹层：产品线管理-->
+	<div id="PL" class="popupwindow PL">
+		<div class="pl_title">产品线管理</div>
+		<div class="pl_box formbody">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>		
+			<tr height="45px">
+				<td width="200px">
+					<label for="pls">已有产品线：</label>
+					<select id="pls" multiple="multiple" size="6" style="width:150px">
+					</select>
+				</td>
+				<td width="100px" valign="top">
+					<div align="center" style="padding-top:24px;">
+					<button id="addpl">添加</button></br></br>
+					<button id="delpl">删除</button></br></br>
+					<button href="javascript:void(0)" onclick="CloseForm('#PL')">关闭</button>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!--弹层：产品管理-->
+	<div id="produman" class="popupwindow produman">
+		<div id="prodm_header">产品管理	</div>		
+		<div class="prodm_formbody" >
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>	
+			<tr height="25px">
+				<td colspan=2>
+					<label for="pls_2">请选择产品线：</label>
+					<select id="pls_2" style="width:180px">
+					</select>
+				</td>
+			</tr>
+			<tr height="45px">
+				<td colspan=2><label for="ps">已有产品：</label></td>
+			</tr>
+			<tr>
+				<td rowspan=3 width="240px">					
+					<select id="ps" multiple="multiple" size="6" style="width:220px"></select>
+				</td>
+				<td width="100px" valign="top" align="right">	
+					<button id="pm_btnSubmit">添加</button>
+				</td>
+			</tr>
+			<tr><td align="right"><button id="pm_btnDel">删除</button></td></tr>
+			<tr><td align="right"><button href="javascript:void(0)" onclick="CloseForm('#produman')">关闭</button></td></tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<!--弹层：新项目-->
+	<div id="newProj" class="popupwindow newProj">
+		<div class="newProj_title">创建新项目</div>
+		<div class="newProj_box formbody">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>	
+			<tr>
+				<td width=80px>项目名称：</td>
+				<td width=190px><input id="new_proj_name" class="new_blank" style="width:170px;"></input></td>
+				<td width=65px>项目来源：</td>
+				<td width=90px><select id="new_customer" style="width:70px;">
+					<option selected=true>自研</option>
+					<option>客户</option>
+					<option>其他</option>
+				</select></td>	
+				<td width=50px>优先级：</td>
+				<td width="50px"><select id="new_priority" style="width:50px;">
+					<option selected=true>高</option>
+					<option>中</option>
+					<option>低</option>
+				</select></td>
+			</tr>			
+			<tr>
+				<td>所属产品线：</td>
+				<td><select id="new_product_line" style="width:170px;"></select></td>
+				<td>产品经理：</td>
+				<td><select id="new_pm" style="width:70px;"></select></td>
+				<td>负责人：</td>
+				<td><input id="new_responsor" class="new_blank" style="width:45px;"></input></td>
+			</tr>
+			<tr>
+				<td>所属产品：</td>
+				<td><select id="new_product" style="width:170px;">
+					<option>大数据集群监控管理系统</option>
+				</select></td>
+				<td colspan=4>计划结束时间：<input type="date" id="new_plan_end_time" class="inputbox" style="width:170px;"/></td>
+			</tr>
+			<tr style="height:100px;">
+				<td colspan=6>
+					<span>项目目标：</span>
+					<textarea id="new_goals" type="text" class="new_blank" style="height: 50px; width: 530px;margin-top:5px"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=6 align="right" style="font-size: 12px; font-family: '宋体';">
+					<button href="javascript:void(0)" onclick="CloseForm('#newProj')">取消</button>
+					<button id="btnSubmit">提交</button>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<!--弹层：编辑或查看项目-->
+	<div id="ProjView" class="popupwindow ProjView">
+		<div class="ProjView_title">项目编号：<span id="proj_id"><span></div>
+		<div class="newProj_box formbody" style="padding-top:10px;padding-bottom:10px;">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tbody>	
+			<tr>
+				<td width=60px>项目名称：</td>
+				<td width=180px><input id="proj_name" class="disableView" style="width:166px;"></input></td>
+				<td width=65px>项目来源：</td>
+				<td width=90px><select id="customer" class="disableView" style="width:75px;">
+					<option selected=true>自研</option>
+					<option>客户</option>
+					<option>其他</option>
+				</select></td>	
+				<td width=50px>优先级：</td>
+				<td width="50px"><select id="priority" class="disableView" style="width:57px;">
+					<option selected=true>高</option>
+					<option>中</option>
+					<option>低</option>
+				</select></td>
+			</tr>			
+			<tr>
+				<td>父产品线：</td>
+				<td><select id="product_line" class="disableView" style="width:170px;"></select></td>
+				<td>产品经理：</td>
+				<td><select id="pm" class="disableView" style="width:75px;"></select></td>
+				<td>负责人：</td>
+				<td><input id="responsor" class="disableView" style="width:52px;"></input></td>
+			</tr>
+			<tr>
+				<td>所属产品：</td>
+				<td><select id="product" class="disableView" style="width:170px;">
+					<option>大数据集群监控管理系统</option>
+				</select></td>
+				<td>项目状态：</td>
+				<td><select id="proj_status" class="disableView" style="width:75px;">
+					<option selected=true>待审批</option>
+					<option>审批通过</option>
+					<option>审批驳回</option>
+					<option>进行中</option>
+					<option>暂停</option>
+					<option>已完成</option>
+					<option>已关闭</option>
+				</select></td>
+				<td>审批人：</td>
+				<td><input id="approver" class="disableView" style="width:52px;"></input></td>
+			</tr>
+			<tr>
+				<td>开始时间：</td>
+				<td><input type="date" id="start_time" class="disableView inputbox" style="width:166px;"/></td>
+				<td colspan=4>计划结束时间：<input type="date" id="plan_end_time" class="disableView inputbox" style="width:190px;"/></td>
+			</tr>
+			<tr>
+				<td>团队成员：</td>
+				<td colspan=5><input type="text" id="team_member" class="disableView inputbox" style="width:470px;"/></td>
+			</tr>
+			<tr>
+				<td>Git库：</td>
+				<td colspan=5><input type="text" id="git" class="disableView inputbox" style="width:470px;"/></td>
+			</tr>
+			<tr style="height:100px;">
+				<td colspan=6>
+					<span>项目目标：</span>
+					<textarea id="goals" type="text" class="disableView" style="height: 50px; width: 532px;margin-top:5px"></textarea>
+				</td>
+			</tr>
+			<tr style="height:100px;">
+				<td colspan=6>
+					<span>项目进展：</span>
+					<textarea id="comments" type="text" class="disableView" style="height: 80px; width: 532px;margin-top:5px"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=6 align="right" style="font-size: 12px; font-family: '宋体';">
+					<button href="javascript:void(0)" onclick="CloseForm('#ProjView')">取消</button>
+					<button id="btnSave">保存</button>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
+<script type="text/javascript" src="js/jquery.treeview.js"></script>
+<script type="text/javascript" src="js/projlist.js"></script>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html style="margin:0">
+<head>
+	<meta charset="utf-8">
+	<title>周报</title>
+	<link rel="stylesheet" type="text/css" href="css/wr.css">	
+</head>
+
+<body style="margin:0">
+	<div id="container">
+		<header>
+			<div id="title">
+				<span id="page_title">历史周报</span>
+				<hr>
+			</div>
+			<div>
+				<table cellpadding="0" cellspacing="0" width=100%>
+				<tbody><tr>
+					<td width=70%>
+						<span id="welcome">您好，<span id="loginuser"></span>，今天是<span id="currtime"></span>，第<span id="weeks"></span>周</span>
+					</td>
+					<td style="text-align:right">
+						<button id="addWR" style="display:none;">创建新周报</button>
+						<button id="addteamWR">创建团队周报</button>
+					</td>
+				</tr></tbody>
+				</table>
+			</div>			
+		</header>
+		<div id="content">
+			<div id="wr_list">
+				<table cellpadding="0" cellspacing="0" width=100%>
+				<thead>
+					<th width=25%>周报</th>
+					<th width=25%>周报日期</th>
+					<th width=20%>提交时间</th>
+					<th width=10%>状态</th>					
+					<th width=20%>操作</th>
+				</thead>
+				<tbody id="wr_list_body">
+				</tbody>
+				</table>
+				<div id="pages">
+					<button id="Fir_page" href="javascript:void(0)" onclick="Topage(1)" class="butt_page">首&nbsp;&nbsp;页</button>
+					<button id="Pre_page" href="javascript:void(0)" onclick="Nextpage('-')" class="butt_page">上一页</button>
+					<span>第<span id="curr_page">1</span>页，共<span id="page_num">1</span>页&nbsp;</span>
+					<button id="Next_page" href="javascript:void(0)" onclick="Nextpage('+')" class="butt_page">下一页</button>
+					<button id="Las_page" href="javascript:void(0)" onclick="Topage(0)" class="butt_page">尾&nbsp;&nbsp;页</button>
+				</div>
+			</div>
+			<div id="newWR">
+				<div id="wr_cont">
+					<div id="div_author">
+						<table cellpadding="0" cellspacing="0" width=100%>
+						<tbody><tr>
+						<td width=60%>
+							<label id="lab_author2" for="author_2">周报撰写人员：</label>
+							<input id="author_2" type="text">
+						</td>
+						<td style="text-align:right">
+							<button id="copywr">复制上期周报</button>
+							<button id="additem">增加项目</button>
+							<button id="delitem">删减项目</button>
+							<button id="exit_wr">返回列表</button>
+						</td>
+						</tr></tbody>
+						</table>						
+					</div>
+					
+					<div id="wr_items">
+						<table cellpadding="0" cellspacing="0" width=100%>
+						<thead>
+							<th width=10% style="border-left:1px solid #000000;">部门</th>
+							<th width=15% colspan=2>项目</th>
+							<th width=55%>工作进展</th>
+							<th width=20%>问题与建议</th>
+						</thead>
+						<tbody>
+						</tbody>
+						</table>					
+					</div>
+				
+				</div>
+				<div id="lowbutt">
+					<button id="submit_wr">提交</button>
+					<button id="edit_wr">修改</button>
+					<button id="release_wr">发布</button>
+					<button id="save_wr">保存</button>
+					<button id="canceledit_wr">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>
+	
+	<!--弹层：创建周报时的配置窗口-->
+	<div id="newWR_panel" class="popwindow">
+		<div class="popw_head">
+			<b>创建新团队周报</b>
+		</div>
+		<div class="popw_body">
+			<table cellpadding="0" cellspacing="1" width=100%>
+			<tbody>
+			<tr>
+				<td class="textline">
+					<label for="owner">部门：</label><br>
+					<input id="owner" type="text" style="width:120px;height:18px;margin-bottom:10px;margin-right:10px;"/>
+				</td>
+				<td class="textline">
+					<label for="currweek">周期：</label><br>
+					<input id="currweek" type="week" style="width:160px;margin-bottom:10px;"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="textline" colspan=2>
+					<label for="author">请指定参与周报编写的人员（中文姓名，逗号分隔）：</label><br>
+					<textarea id="author" type="text" style="width:300px;height:40px;"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 align="right" style="height:40px;margin-top:15px;">						
+					<button id="wr_cancle_creat">取消</button>
+					<button id="wr_creat">创建</button>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+		</div>		
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/weekreport.js"></script>
+</html>

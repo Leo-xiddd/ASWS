@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>测试实施管理</title>
+	<link rel="stylesheet" type="text/css" href="css/testexce.css">
+</head>
+
+<body style="margin:0;border:0;">
+	<!--出勤热力图-->
+	<div class="box_title">
+		<table cellspacing="0" cellpadding="0" width=100%><tbody><tr>
+			<td width="80%"><b>人员工时热力图（单位：工时/天）</b></td>
+			<td align="right">
+				<button class="box_member" href="javascript:void(0)" onclick="open_form('#form_Attendee_manage','.overlay')"></button>
+				<button class="box_config" href="javascript:void(0)" onclick="open_form('#form_AttendDetail','.overlay')"></button>
+				<button class="box_fold" href="javascript:void(0)" onclick="toggle_box('#Chart_attendance')"></button>
+			</td>
+		</tr></tbody></table>		
+	</div>
+	<div id="topbox" class="linebox">
+		<div id="Chart_attendance"></div>
+	</div>
+	<!-- 测试任务管理 -->
+	<header>
+		<table cellspacing="0" cellpadding="0" width=100%><tbody><tr>
+		<td align="left">
+			<button class="head_butt" href="javascript:void(0)" onclick="add_task('new')">创建任务</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="add_task('edit')">修改任务</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="del_task()">删除任务</button>
+		</td>
+		<td align="right">
+			<select id="phase_task" type="text">
+				<option value="assignto">执行人</option>
+				<option value="tasktype">任务类型</option>
+			</select>
+			<input id="filter_task" type="text">
+			<button id="find_task">查找</button>
+		</td>
+		</tr></tbody></table>
+	</header>
+	<div class="tasklist">
+		<table id="tb_tasklist" width=100% cellspacing="0" cellpadding="0">		
+			<thead style="background-color: #D0ECE2">
+				<th class="cell" width='15px'></th>
+				<th class="cell" height=25>项目</th>
+				<th class="cell">版本</th>
+				<th class="cell">测试经理</th>
+				<th class="cell">开始时间</th>			
+			</thead>
+			<tbody id="tab_tasklist">
+				<tr class="tdats" id="tl1">
+					<td>
+						<img src="img/collspan.png" width="12" height="12" href="javascript:void(0)" onclick="expandST(this)">
+					</td>
+					<td class="cell">AutoDSP</td>
+					<td class="cell">1.4.1.2</td>
+					<td class="cell">赵迪</td>
+					<td class="cell">2017-07-17</td>
+				</tr>
+				<tr class="collspan">
+					<td></td>
+					<td colspan=4>
+						<table width=100% cellspacing="0" cellpadding="0" class="subtable">
+							<thead class="thead">
+								<th class="cell" width=50 height=25>编号</th>
+								<th class="cell" width=120>任务</th>
+								<th class="cell" width=70>执行人</th>
+								<th class="cell" width=120>创建时间</th>	
+								<th class="cell" width=120>期望结束时间</th>
+								<th class="cell" width=70>任务状态</th>
+								<th class="cell" width=200>必要条件说明</th>	
+								<th class="cell" width=200>任务内容说明</th>			
+							</thead>
+							<tbody class="tab_subtasklist">
+								<tr class="tdats" id="201701">
+									<td class="cell"><a href="javascript:void(0)" onclick="open_subtask('201701')">201701</a></td>
+									<td class="cell">测试abc模块</td>
+									<td class="cell">刘雪娇</td>
+									<td class="cell">2017-07-12 12:32:00</td>
+									<td class="cell">2017-07-13 17:30:00</td>
+									<td class="cell">进行中</td>
+									<td class="cell">条件1.圣诞节收到但是...</td>
+									<td class="cell">测试地址：xxxx...</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+
+	<div id="mainboard">
+		<div style="padding-right: 38px;">
+			<table cellspacing="0" cellpadding="0" width=100%><tbody><tr>
+				<td width="50%" align="left">
+					<div class="box_title_small" style="width: 93%;">
+						<table cellspacing="0" cellpadding="0" width="100%"><tbody><tr>
+							<td width=80%><b>实习生人力资源需求变化</b></td>
+							<td align="right">
+								<button class="box_config" href="javascript:void(0)" onclick="open_form('#form_ManPoReq','.overlay')"></button>
+								<button class="box_fold" href="javascript:void(0)" onclick="toggle_box('#chart_ManPowerReq')"></button>
+							</td>
+						</tr></tbody></table>		
+					</div>
+					<div class="linebox_small" style="width: 93%;">
+						<div id="chart_ManPowerReq" class="pic_small"></div>
+					</div>
+				</td>
+				<td align="right">
+					<div class="box_title_small" style="width: 93%;">
+						<table cellspacing="0" cellpadding="0" width="100%"><tbody><tr>
+							<td width=80%><b>月度用例执行效率(条/人*天)</b></td>
+							<td align="right">
+								<button class="box_fold" href="javascript:void(0)" onclick="toggle_box('#chart_TCexeRate')"></button>
+							</td>
+						</tr></tbody></table>		
+					</div>
+					<div class="linebox_small" style="width: 93%;">
+						<div id="chart_TCexeRate" class="pic_small"></div>
+					</div>
+				</td>
+			</tr></tbody></table>		
+		</div>
+		
+		<header>
+			<table cellspacing="0" cellpadding="0" width=100%><tbody><tr>
+			<td align="left">
+				<button class="head_butt" href="javascript:void(0)" onclick="add_Daylog('new')">填写日志</button>
+				<button class="head_butt" href="javascript:void(0)" onclick="add_Daylog('edit')">修改日志</button>
+				<button class="head_butt" id="del_Daylog" href="javascript:void(0)" onclick="del_Daylog()">删除日志</button>
+				<button class="head_butt" id="import_Daylog" href="javascript:void(0)" onclick="import_Daylog()">导出</button>
+			</td>
+			<td align="right">
+				<select id="phase" type="text">
+					<option value="date">日期</option>
+					<option value="name">人员</option>
+					<option value="worktype">任务类型</option>
+					<option value="testproj">项目</option>
+				</select>
+				<input id="filter" type="text">
+				<button id="find">查找</button>
+			</td>
+			</tr></tbody></table>
+		</header>
+		<div class="Dloglist">
+			<table id="tb_Dloglist" width=100% cellspacing="0" cellpadding="0">		
+				<thead class="thead">
+					<th class="cell" width=55 height=25>日期</th>
+					<th class="cell" width=75>人员</th>
+					<th class="cell" width=70>任务类别</th>
+					<th class="cell" width=45>时段</th>
+					<th class="cell" width=105>项目</th>
+					<th class="cell" width=50>版本</th>
+					<th class="cell" width=50>执行用例</th>
+					<th class="cell" width=50>新报Bug</th>
+					<th class="cell" width=50>回归Bug</th>
+					<th class="cell" width=255>说明</th>			
+				</thead>
+				<tbody id="tab_Dloglist"></tbody>
+			</table>
+
+			<div id="pages" style="text-align:right;font-family:'微软雅黑';font-size:12px;margin-top:10px">
+				<button id="Fir_page" href="javascript:void(0)" onclick="Topage(1)" class="butt_page">首&nbsp;页</button>
+				<button id="Pre_page" href="javascript:void(0)" onclick="Nextpage('-')" class="butt_page">上一页</button>
+				<span>第<span id="curr_page">1</span>页，共<span id="page_num">1</span>页&nbsp;</span>
+				<button id="Next_page" href="javascript:void(0)" onclick="Nextpage('+')" class="butt_page">下一页</button>
+				<button id="Las_page" href="javascript:void(0)" onclick="Topage(0)" class="butt_page">尾&nbsp;页</button>
+			</div>
+		</div>
+	</div>	
+	
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>
+	<!--遮罩层2：用于显示二次弹层后遮盖下面的页面元素-->
+	<div id="overlay2" class="overlay2"></div>
+	
+	<!--弹层：人员考勤热力图-->
+	<div id="form_AttendDetail" class="popupwindow">
+		<div class="form_title"><b><span id="form_AttendDetail_year"></span>年 测试执行人员到岗出勤情况</b></div>
+		<div class="formbody">
+			<div id="Chart_attendance_detail"></div>
+		</div>
+		<div class="form_baseinfo">
+		 	<span style="margin-left:56px">选择年份：</span> <select id="attend_year_list"></select>			
+			<span style="margin-left:20px">选择人员：</span> <select id="tester_list"></select>
+			<span style="margin-left:20px"><b>统计信息：</b></span>
+			<span id="form_AttendDetail_static"></span>
+			<span>（数值说明：1-请假，2-上午到岗，3-下午到岗，4-全天到岗）</span>
+		</div>
+		
+		<div class="form_button">
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_AttendDetail','#overlay')">关闭</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="open_form('#form_AttendDetail_edit','.overlay2')">编辑</button>
+		</div>
+	</div>
+	<!--二次弹层：人员考勤热力图-编辑考勤时间-->
+	<div id="form_AttendDetail_edit" class="popupwindow2">
+		<div class="form_title_2"><b>编辑出勤数据</b></div>
+		<div class="form_baseinfo">
+			<span>日期：</span><input type="date" id="AttendDetail_edit_date" style="width:115px" />
+			<span style="margin-left: 15px;">人员：</span><input type="text" id="AttendDetail_edit_tester" style="width:55px" />
+			<span style="margin-left: 15px;">出勤周期：</span>
+			<select id="AttendDetail_edit_time">
+				<option data-value='1' data-type='4'>9:00-17:30</option>
+				<option data-value='0.5' data-type='2'>9:00-12:00</option>
+				<option data-value='0.5' data-type='3'>13:00-17:30</option>				
+				<option data-value='0' data-type='1'>0:00-0:00</option>
+			</select>
+		</div>
+		<div class="form_button">
+			<button class="head_butt" id="Submit_AttendDetail" href="javascript:void(0)" onclick="Submit_AttendDetail()">保存</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_AttendDetail_edit','#overlay2')">取消
+			</button>
+		</div>
+	</div>
+	<!--弹层：实习生管理-->
+	<div id="form_Attendee_manage" class="popupwindow">
+		<div class="form_title"><b>实习生管理</b></div>
+		<div class="formbody">
+			<table cellspacing="0" cellpadding="0" border="0">
+				<thead>		
+					<th width="65px" class="rightbord">实习生</th>					
+					<th width="45px">状态</th>
+					<th width="65px">签约次数</th>
+					<th width="100px">入职时间</th>
+					<th width="100px">离职时间</th>
+					<th width="65px">在职周期</th>
+				</thead>
+			</table>
+		</div>
+		<div class="formbody memblist">
+			<table cellspacing="0" cellpadding="0" border="0" id="tb_Attendee_manage">	
+				<col width="67px"/>					
+				<col width="46px"/>
+				<col width="66px"/>
+				<col width="101px"/>
+				<col width="101px"/>
+				<col width="66px"/>
+				<tbody id="tab_Attendee_manage">
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="form_button">
+			<button class="head_butt" id="Add_contractor" href="javascript:void(0)" onclick="Add_contractor()">新增</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="open_form('#form_Attendee_edit','.overlay2')">编辑</button>
+			<button class="head_butt" id="Del_contractor" href="javascript:void(0)" onclick="Del_contractor()">删除</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_Attendee_manage','#overlay')">关闭</button>
+		</div>
+	</div>
+	<!--二次弹层：编辑实习生信息-->
+	<div id="form_Attendee_edit" class="popupwindow2">
+		<div class="form_title_2"><b>编辑实习生信息</b></div>
+		<div class="form_baseinfo">
+			<table cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+					<tr height=20px>
+						<td>姓名</td>
+						<td>状态</td>
+						<td>签约次数</td>
+						<td>入职日期</td>
+						<td>离职日期</td>
+					</tr>
+					<tr>
+						<td><input type="text" id="member_name" /></td>
+						<td><select id="member_state"><option>在职</option><option>离职</option></select></td>
+						<td><input type="text" id="member_signs"/></td>
+						<td><input type="date" id="in_time" style="width:115px" /></td>
+						<td><input type="date" id="out_time" style="width:115px" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="form_button">
+			<button class="head_butt" id="Update_contractor" href="javascript:void(0)" onclick="Update_contractor()">保存</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_Attendee_edit','#overlay2')">取消
+			</button>
+		</div>
+	</div>
+	<!--弹层：工作日志-->
+	<div id="form_Daylog" class="popupwindow">
+		<div class="form_title"><b>工作日志</b></div>
+		<div id="form_Daylog_baseinfo">
+			<span>（人员：</span><span id="Daylog_person" style="margin-right: 15px"></span>
+			<span>日期：</span><input id="Daylog_date" type="date" style="border: 0px;margin-right: 15px;"/>
+			<span>考勤时间：</span>	
+			<select id="Daylog_attendee" style="border: 0px;">
+				<option data-value="1" data-type='4'>9:00-17:30</option>
+				<option data-value="0.5" data-type='2'>9:00-12:00</option>
+				<option data-value="0.5" data-type='3'>13:00-17:30</option>
+			</select>
+			<span>）</span>	
+		</div>
+
+		<div class="formbody">
+			<div align="right" style="padding-right: 15px;">
+				<img src="img/delitem.png" width="20" height="20" title="删除" href="javascript:void(0)" onclick="delADlog()">
+				<img src="img/additem.png" width="20" height="20" title="新增" href="javascript:void(0)" onclick="addADlog()">
+			</div>
+			<table cellspacing="0" cellpadding="0" border="0" id="tb_form_Dlog">
+				<thead>		
+					<th width="85px" class="rightbord">任务类别</th>
+					<th width="350px">说明</th>
+					<th width="160px">项目</th>
+					<th width="80px">版本号</th>
+					<th width="65px">执行用例</th>
+					<th width="60px">新报Bug</th>
+					<th width="60px">回归Bug</th>
+				</thead>
+				<tbody id="form_Daylog_content">
+					<tr class="Dlog_row">
+						<td class="leftcol">
+							<select class="Dlog_type">
+								<option>测试任务</option>
+								<option>学习或会议</option>
+								<option>系统运维</option>
+								<option>测试开发</option>
+							</select>
+						</td>
+						<td><textarea type="text" class="Dlog_content new_blank"></textarea></td>
+						<td><input type="text" class="Dlog_proj new_blank"/></td>
+						<td><input type="text" class="Dlog_ver new_blank"/></td>
+						<td><input type="text" class="Dlog_tcexe new_blank"/></td>
+						<td><input type="text" class="Dlog_newbug new_blank"/></td>
+						<td><input type="text" class="Dlog_regbug new_blank"/></td>
+					</tr>			
+				</tbody>
+			</table>
+		</div>
+
+		<div class="form_button">
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_Daylog','#overlay')">取消</button>
+			<button class="head_butt" id="Update_Daylog" href="javascript:void(0)" onclick="Update_Daylog()">提交</button>
+		</div>
+	</div>
+
+	<!--弹层：人员需求详情-->
+	<div id="form_ManPoReq" class="popupwindow">
+		<div class="form_title">
+			<span><b>修改人员需求</b></span>
+		</div>
+		<div class="formbody">
+			<div id="Chart_ManPoReq_detail"></div>			
+		</div>
+		<div class="form_baseinfo">
+			<span>起始时间：</span><input type="date" id="ManPoReq_sttime"/>
+			<span>结束时间：</span><input type="date" id="ManPoReq_edtime"/>
+			<span>需求人数：</span><input type="text" id="ManPoReq_num" style="width: 50px;" />
+			<button class="head_butt" id="Update_ManPoReq" href="javascript:void(0)" onclick="Update_ManPoReq()">提交</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_ManPoReq','#overlay')">关闭</button>
+		</div>
+	</div>
+	<!-- 弹层：测试任务（可编辑） -->
+	<div id="form_task_edit" class="popupwindow form_task">
+		<div class="form_title">
+			<span><b>测试任务详情</b></span><span id='task_index'></span>
+		</div>
+		<div class="formbody">
+			<table cellspacing="0" cellpadding="0" width=98% >
+			<tbody>
+				<tr>
+					<td width="40%"><b>测试项目：</b><span id='task_proj'></span>-<span id='task_subver'></span></td>
+					<td width="40%"><b>开始时间：</b><span id='task_starttime'></span></td>
+					<td><b>测试经理：</b><span id='task_responsor'></span></td>					
+				</tr>
+			</tbody>
+			</table>
+			<span>---------------------------------------------------------------------------------------</span>
+			<table cellspacing="0" cellpadding="0" width=98% style="margin-top: 5px;">
+			<colgroup>
+				<col width="41%">
+				<col width="59%">
+			</colgroup>
+			<tbody>	
+				<tr>
+					<td colspan=2><b>任务名：</b><input type="text" id="task_name" style="width:405px;"></td>
+				</tr>
+				<tr>
+					<td><b>任务执行人：</b><select id='task_exector'></select></td>
+					<td><b>任务状态：</b><span id='task_status'></span></td>
+				</tr>
+				<tr>					
+					<td colspan=2>
+						<b>期望完成时间：</b>
+						<input type="date" id="task_enddate_exp" style="width:120px;">
+						<input type="time" id="task_endtime_exp" style="width:70px;">
+					</td>					
+				</tr>
+				<tr>
+					<td colspan=2><b>任务执行条件说明：</b></td>
+				</tr>
+				<tr>
+					<td colspan=2><textarea id='task_precondition' class="task_text"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan=2><b>任务内容说明：</b></td>
+				</tr>
+				<tr>
+					<td colspan=2><textarea id='task_content' class="task_text"></textarea></td>
+				</tr>
+			</tbody>
+			</table>			
+		</div>
+		<div class="form_baseinfo" align="center" style="margin-top: 0px;">
+			<button class="head_butt" href="javascript:void(0)" onclick="Save_task()">保存</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_task_edit','#overlay')">关闭</button>
+		</div>
+	</div>
+	<!-- 弹层：测试任务 -->
+	<div id="form_task" class="popupwindow form_task">
+		<div class="form_title">
+			<span><b>测试任务详情</b></span><span id='task_index_review'></span>
+		</div>
+		<div class="formbody">
+			<table cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td width="40%"><b>测试项目：</b><span id='task_proj_review'></span>-<span id='task_subver_review'></span></td>
+					<td width="40%"><b>开始时间：</b><span id='task_starttime_review'></span></td>
+					<td><b>测试经理：</b><span id='task_responsor_review'></span></td>
+				</tr>
+			</tbody>
+			</table>
+			<span>---------------------------------------------------------------------------------------</span>
+			<table cellspacing="0" cellpadding="0" style="margin-top: 5px;">
+			<tbody>
+				<tr>
+					<td colspan=3><b>任务名：</b><input type="text" id="task_name_review" style="width:405px;" disabled="disabled"></td>
+				</tr>
+				<tr>
+					<td width="26%"><b>任务执行人：</b><span id='task_exector_review'></span></td>									
+					<td width="40%"><b>期望完成时间：</b><span id="task_endtime_exp_review"></span></td>	
+					<td><b>任务状态：</b><span id='task_status_review'></span></td>					
+				</tr>
+				<tr>
+					<td colspan=3><b>任务执行条件说明：</b></td>
+				</tr>
+				<tr>
+					<td colspan=3><textarea id='task_precondition_review' class="task_text" disabled="disabled"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan=3><b>任务内容说明：</b></td>
+				</tr>
+				<tr>
+					<td colspan=3><textarea id='task_content_review' class="task_text" disabled="disabled"></textarea></td>
+				</tr>
+			</tbody>
+			</table>			
+		</div>
+		<div class="form_baseinfo" align="center" style="margin-top: 0px;">
+			<button class="head_butt" id="butt_task_opt" data-value="已完成">完成</button>
+			<button class="head_butt" id="butt_task_opt1">驳回</button>
+			<button class="head_butt" href="javascript:void(0)" onclick="CloseForm('#form_task','#overlay')">关闭</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/buildchart.js"></script>
+<script type="text/javascript" src="js/download.min.js"></script>
+<script type="text/javascript" src="js/testexce.js"></script>
+</html>

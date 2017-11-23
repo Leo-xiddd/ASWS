@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>测试报告</title>
+	<style type="text/css">
+		body{font-family:'微软雅黑';font-size: 12px;}
+		.thformat{background-color: #BCC3F1;border-top:1px solid;}
+		.td_line{border-bottom:1px solid;}
+	</style>
+</head>
+
+<body>
+	<table style="border:1px solid;" cellspacing="15" cellpadding="5" align="center">
+	<tbody>
+	<tr><td>
+		<table id="frames" cellspacing="0" cellpadding="0"><tbody>
+			<tr id="header"><td>
+				<table width="665" cellspacing="0" cellpadding="0"><tbody>
+					<tr height="64">
+						<td width="270"><img src="cid:logo.png" width="142.8" height="61.2" style="padding-left: 10px;"/></td>
+						<td width="300"></td>
+						<td><img src="cid:passlogo.png" width="69" height="64" style="margin-right:10px;"/></td>
+					</tr>
+				</tbody></table>
+			</td></tr>
+			<tr id="tiitle" height="40px;" style="line-height:30px;"><td align="center" class="td_line" style="font-size: 22px;color: #072E68;">
+				<b><span id="Proj_Name"></span>_<span id="Proj_Subversion"></span>测试报告</b>
+			</td></tr>
+			<tr id="title_plus"><td>
+				<table width="665" cellspacing="0" cellpadding="0"><tbody>
+					<tr>
+						<td align="left">报告日期：<span id="Report_time"></span></td>
+						<td></td>
+						<td align="right">报告人：<span id="Reporter"></span></td>
+					</tr>
+				</tbody></table>
+			</td></tr>
+			<tr id="test_summary"><td>
+				<table width="665" cellspacing="0" cellpadding="0"><tbody>
+					<tr height="10px">
+						<td width="20px">&nbsp;</td>
+						<td></td>
+					</tr>
+					<tr height="50px" style="line-height:20px;font-size: 16px;">
+						<td><b>1.</b></td>
+						<td><b>测试结论</b></td>
+					</tr>
+					<tr height="10px" style="line-height:25px;">
+						<td></td>
+						<td>本次测试共执行用例&nbsp;<span id="Num_tc_exe"></span> &nbsp;条，其中&nbsp;<span id="Num_tc_fail"></span> &nbsp;条用例执行未通过，失败率&nbsp;<span id="Rate_tc_fail"></span> %, 当前遗留bug共计&nbsp;<span id="Num_bug_unclose"></span> &nbsp;个。<br>根据上线标准，测试结论为：<span id="TestResult"></span> ，参考标准请见《车慧产品上线活动流程规范》。</td>
+					</tr>
+					<tr style="line-height:30px;">
+						<td></td>
+						<td><b>本次测试中发现的主要问题如下：<b></td>
+					</tr>
+					<tr style="line-height:25px;">
+						<td></td>
+						<td style="padding-left:10px"><span id="issues"></span></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td></td>
+					</tr>
+				</tbody></table>
+			</td></tr>
+			<tr id="baseinfo"><td>
+				<table width="665" cellspacing="0" cellpadding="0"><tbody>
+					<tr height="20px">
+						<td width="20px"></td>
+						<td width="160"></td>
+						<td width="160"></td>
+						<td width="320"></td>
+					</tr>
+					<tr height="50px" style="line-height:20px;font-size: 16px;">
+						<td><b>2.</b></td>
+						<td colspan=3><b>测试基本信息</b></td>
+					</tr>
+					<tr style="line-height:25px;">
+						<td></td>
+						<td><B>测试负责人：</B><span id="Responsor"></span></td>
+						<td colspan=2><B>测试周期：</B><span id="Time_start"></span>&nbsp;至&nbsp;<span id="Time_end"></span>，共计&nbsp;<span id="Timecost"></span>&nbsp;天</td>
+					</tr>
+					<tr style="line-height:25px;">
+						<td></td>
+						<td><B>测试版本：</B><span id="Proj_Subversion"></span></td>
+						<td><B>测试轮数：</B><span id="Cycles"></span></td>
+						<td><B>测试工程师：</B><span id="Testengineer"></span></td>
+					</tr>
+					<tr style="line-height:30px;">
+						<td></td>
+						<td colspan=3><B>本次测试的测试范围包括：</B></td>
+					</tr>
+					<tr style="line-height:20px;">
+						<td></td>
+						<td colspan=3 style="padding-left:10px"><span id="Range"></span></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td colspan=3></td>
+					</tr>
+				</tbody></table>
+			</td></tr>
+			<tr id="defect_static"><td>
+				<table width="665" cellspacing="0" cellpadding="0"><tbody>
+					<tr height="20px">
+						<td width="20px"></td>
+						<td></td>
+					</tr>
+					<tr height="50px" style="line-height:20px;font-size: 16px;">
+						<td><b>3.</b></td>
+						<td><b>缺陷统计</b></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<table style="text-align: center;margin-top:10px;" cellspacing="0" cellpadding="0"><tbody>
+								<tr height="25px">
+									<th bgcolor="#FBFFE5" class="thformat" style="border-left:1px solid;">总计</th>
+									<th bgcolor="#FBFFE5" class="thformat">遗留Bug</th>
+									<th bgcolor="#FBFFE5" class="thformat">遗留严重Bug</th>
+									<th bgcolor="#FBFFE5" class="thformat">重新打开</th>
+									<th bgcolor="#FBFFE5" class="thformat">关闭</th>
+									<th bgcolor="#FBFFE5" class="thformat">Open Rate(%)</th>
+									<th bgcolor="#FBFFE5" class="thformat">Reopen Rate(%)</th>
+									<th bgcolor="#FBFFE5" class="thformat" style="border-right:1px solid;">DQS</th>
+								</tr>
+								<tr height="25px">
+									<td width="60" class="td_line" style="border-left:1px solid;"><span id="Num_bug_total"></span> </td>
+									<td width="70" class="td_line"><span id="Num_bug_unclose"></span> </td>
+									<td width="110" class="td_line"><span id="Num_bug_ul3"></span> </td>
+									<td width="70" class="td_line"><span id="Num_bug_reopen"></span> </td>
+									<td width="60" class="td_line"><span id="Num_bug_close"></span> </td>
+									<td width="110" class="td_line"><span id="Rate_bug_open"></span> </td>
+									<td width="120" class="td_line"><span id="Rate_bug_reopen"></span> </td>
+									<td width="60" class="td_line" style="border-right:1px solid;"><span id="Num_dqs"></span> </td>
+								</tr>
+								<tr>
+									<td colspan=8 align="right">注：统计数据均为当前版本累计数据</td>
+								</tr>
+							</tbody></table>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td></td>
+					</tr>
+				</tbody></table>
+			</td></tr>
+			<tr id="conditions"><td>
+				<table width="665" cellspacing="0" cellpadding="0"><tbody>
+					<tr height="20px">
+						<td width="20px"></td>
+						<td></td>
+					</tr>
+					<tr height="50px" style="line-height:20px;font-size: 16px;">
+						<td><b>4.</b></td>
+						<td><b>测试环境</b></td>
+					</tr>
+					<tr style="line-height:20px;">
+						<td></td>
+						<td><span id="Testconditions"></span></td>
+					</tr>
+				</tbody></table>
+			</td></tr>
+			<tr id="bottom_line" height="60px"><td align="center">
+				<hr>
+				<span>&copy; 2017&nbsp; 车慧&nbsp; AutoSmart &nbsp;&nbsp;&nbsp; 质量管理部</span>
+			</td></tr>
+		</tbody></table> 
+	</td></tr>
+	</tbody>
+	</table>
+</body>
+</html>

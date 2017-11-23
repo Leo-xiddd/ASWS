@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>用户管理</title>
+	<link rel="stylesheet" type="text/css" href="css/UsrMan.css">
+</head>
+
+<body style="margin:0;border:0;">
+	<div id="container">
+	<!--功能按钮-->
+	<header>
+		<table width="960px" cellspacing="0" cellpadding="0"><tbody><tr>
+			<td width=60%>
+				<button id="User_import" class="module_butt">LDAP导入用户</button>
+				<button id="Usr_add" class="module_butt">添加本地用户</button>
+				<button id="Usr_del" class="module_butt">删除用户</button>
+			</td>
+			<td align='right'>
+				<select id="user_phase" type="text">
+					<option selected=true value="usrname">账号</option>
+					<option value="fullname">姓名</option>
+					<option value="dept1">一级部门</option>
+					<option value="dept2">二级部门</option>
+					<option value="email">邮件</option>
+					<option value="mobile">手机</option>
+					<option value="type">类型</option>
+				</select>
+				<input id="user_filter" type="text">
+				<button id="Usr_find" class="module_butt">查找</button>
+			</td>
+		</tr></tbody></table>	
+	</header>
+	<!--用户列表-->
+	<div id="Userlist">
+		<div id="table_head">
+			<table width="960px" cellspacing="0" cellpadding="0"><tbody><tr>
+				<td width="5%">
+					<button id="ProjectMan" class="th_butt">ID</button>
+				</td>
+				<td width="12%">
+					<button id="ProjectMan" class="th_butt">账号</button>
+				</td>
+				<td width="16%">
+					<button id="ProjectMan" class="th_butt">姓名</button>
+				</td>
+				<td width="12%">
+					<button id="ProjectMan" class="th_butt">一级部门</button>
+				</td>
+				<td width="12%">
+					<button id="ProjectMan" class="th_butt">二级部门</button>
+				</td>
+				<td width="23%">
+					<button id="ProjectMan" class="th_butt">邮件</button>
+				</td>
+				<td width="12%">
+					<button id="ProjectMan" class="th_butt">手机</button>
+				</td>
+				<td width="8%">
+					<button id="ProjectMan" class="th_butt">类型</button>
+				</td>
+			</tr></tbody></table>
+		</div>
+		<div id="table_body" style="overflow-y: auto;overflow-x: hidden;height:417px;">
+			<table width="960px" cellspacing="0" cellpadding="0">
+				<col width="5%"/>
+				<col width="12%"/>
+				<col width="16%"/>
+				<col width="12%"/>
+				<col width="12%"/>
+				<col width="23%"/>
+				<col width="12%"/>
+				<col width="8%"/>
+				<tbody id="usrlist_tbody">
+				</tbody>
+			</table>
+		</div>		
+	</div>
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>	
+	<!--弹层：Ldap配置-->	
+	<div id="LDAPconf" class="popwindow">
+		<div id="title_LDAPconf" class="pop_head">LDAP导入用户</div>
+		<div class="pop_body">
+			<table id="LDAPconf_table" width="100%" cellspacing="0" cellpadding="0"><tbody>
+				<tr>
+					<td width="38%"><label for="ldap_host">LDAP服务器</label></td>
+					<td><input id="ldap_host" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="ldap_port">端口</label></td>
+					<td><input id="ldap_port" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="ldap_domain">基础域</label></td>
+					<td><input id="ldap_domain" type="text" placeholder="如@tech.bitauto.com"></td>
+				</tr>
+				<tr>
+					<td><label for="ldap_admin">管理员账号</label></td>
+					<td><input id="ldap_admin" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="ldap_pwd">管理员密码</label></td>
+					<td><input id="ldap_pwd" type="password"></td>
+				</tr>
+			</tbody></table>
+			<div class="pop_bottom_butt">
+				<button id="LDAPconf_cancel">取消</button>
+				<button id="LDAPconf_save">保存</button>				
+			</div>
+		</div>
+	</div>
+	
+	<!--弹层：Ldap导入-->	
+	<div id="LDAPimport" class="popwindow">
+		<div id="title_LDAPimport" class="pop_head">LDAP导入用户</div>
+		<div class="pop_body">
+			<div>
+				<label for="ldap_BD">请输入要导入用户的路径(BaseDN),例如"OU=质量管理部,OU=数据产品中心,OU=车慧,OU=新意互动"</label><br>
+				<input id="ldap_BD" type="text">
+			</div>
+			<div class="pop_bottom_butt">
+				<button id="LDAPimport_cancel">取消</button>
+				<button id="LDAPimport_import">导入</button>	
+				<button id="LDAPimport_modify">修改LDAP配置</button>
+			</div>
+		</div>
+	</div>
+	
+	<!--弹层：用户信息，用于添加本地用户或者修改用户信息-->	
+	<div id="UserInfo" class="popwindow">
+		<div id="title_UserInfo" class="pop_head"></div>
+		<div class="pop_body">
+			<table id="userinfo_table" width="100%" cellspacing="0" cellpadding="0"><tbody>
+				<tr>
+					<td width="30%"><label for="usr_account">账号*</label></td>
+					<td><input id="usr_account" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_pwd">密码</label></td>
+					<td><input id="usr_pwd" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_fullname">姓名*</label></td>
+					<td><input id="usr_fullname" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_dept1">一级部门</label></td>
+					<td><input id="usr_dept1" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_dept2">二级部门</label></td>
+					<td><input id="usr_dept2" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_role">角色</label></td>
+					<td><input id="usr_role" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_mail">电子邮件</label></td>
+					<td><input id="usr_mail" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_mobile">手机</label></td>
+					<td><input id="usr_mobile" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_type">类型*</label></td>
+					<td><input id="usr_type" type="text"></td>
+				</tr>
+			</tbody></table>
+			<div class="pop_bottom_butt">
+				<button id="UserInfo_cancel">取消</button>
+				<button id="UserInfo_save">保存</button>				
+			</div>
+		</div>
+	</div>
+	</div><!--用于结束container-->
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/um.js"></script>
+</html>

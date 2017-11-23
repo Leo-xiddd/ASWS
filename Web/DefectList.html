@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bug列表</title>
+	<link rel="stylesheet" type="text/css" href="css/Defectlis.css">
+</head>
+
+<body style="margin:0;border:0;">
+	<div id="container">
+	<!--功能按钮-->
+	<header>
+		<table width="960px" cellspacing="0" cellpadding="0" style="font-family:'微软雅黑';font-size: 12px;"><tbody>
+		<tr><td height="40px" valign="top" style="font-size: 22px;"><b>ALM Bug列表</b></td></tr>
+		<tr>
+			<td width=20%>
+				<span><b>域：</b><span id="doamin"></span></span>
+			</td>
+			<td width=35%>
+				<span><b>项目：</b><span id="proj"></span></span>
+			</td>
+			<td align='right'>
+				<button id="Bug_fresh" class="module_butt">更新Bug列表</button>
+				<select id="phase" type="text">
+					<option selected=true value="id">ID</option>
+					<option value="summary">摘要</option>
+					<option value="assignto">分配给</option>
+					<option value="state">状态</option>
+					<option value="severity">严重程度</option>
+					<option value="version">版本</option>
+					<option value="tester">测试者</option>
+					<option value="defect_time">测试日期</option>
+					<option value="module">功能模块</option>
+				</select>
+				<input id="Bug_filter" type="text">
+				<button id="Bug_find" class="module_butt">查找</button>
+			</td>
+		</tr></tbody></table>	
+	</header>
+	<!--Bug列表-->
+	<div id="Buglist">
+		<div id="table_head">
+			<table width="950px" cellspacing="0" cellpadding="0"><tbody><tr>
+				<td width="4%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('id')">ID</button>
+				</td>
+				<td width="38%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('summary')">摘要</button>
+				</td>
+				<td width="8%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('assignto')">分配给</button>
+				</td>
+				<td width="7%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('state')">状态</button>
+				</td>
+				<td width="8%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('severity')">严重程度</button>
+				</td>
+				<td width="6%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('version')">版本</button>
+				</td>
+				<td width="8%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('tester')">测试者</button>
+				</td>
+				<td width="9%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('defect_time')">测试日期</button>
+				</td>
+				<td width="12%">
+					<button class="th_butt" href="javascript:void(0)" onclick="relist('module')">功能模块</button>
+				</td>
+			</tr></tbody></table>
+		</div>
+		<div id="table_body">
+			<table width="950px" cellspacing="0" cellpadding="0">
+				<col width="4%"/>
+				<col width="38%"/>
+				<col width="8%"/>
+				<col width="7%"/>
+				<col width="8%"/>
+				<col width="6%"/>
+				<col width="8%"/>
+				<col width="9%"/>
+				<col width="12%"/>
+				<tbody id="buglist_tbody"></tbody>
+			</table>
+		</div>
+		<div id="pages" style="text-align:right;font-family:'微软雅黑';font-size:12px;margin-top:10px;margin-right:10px;">
+			<button id="Fir_page" href="javascript:void(0)" onclick="Topage(1)" class="butt_page">首&nbsp;页</button>
+			<button id="Pre_page" href="javascript:void(0)" onclick="Nextpage('-')" class="butt_page">上一页</button>
+			<span>第<span id="curr_page">1</span>页，共<span id="page_num">1</span>页&nbsp;</span>
+			<button id="Next_page" href="javascript:void(0)" onclick="Nextpage('+')" class="butt_page">下一页</button>
+			<button id="Las_page" href="javascript:void(0)" onclick="Topage(0)" class="butt_page">尾&nbsp;页</button>
+		</div>
+	</div>
+	<!--遮罩层：用于显示弹层后遮盖下面的页面元素-->
+	<div id="overlay" class="overlay"></div>	
+	<!--弹层：等候处理-->
+	<div id="wait" class="popwindow wait">
+		<div align="center" Style="padding-top:10px;"><img src="img/2qw.gif" width="171" height="113"/></div>
+		<div Style="margin-top:30px;padding-left:20px;padding-right:20px;text-align:center;line-height:25px;"><span id="blank_note" class="blank_note">正在获取Bug数据，请稍等......</span></div>
+	</div>
+	
+	<!--弹层：Bug信息，用于查看更详细的Bug信息-->	
+	<div id="DefectInfo" class="popwindow">
+		<div id="title_DefectInfo" class="pop_head"></div>
+		<div class="pop_body">
+			<table id="DefectInfo_table" width="100%" cellspacing="0" cellpadding="0"><tbody>
+				<tr>
+					<td width="30%"><label for="usr_account">账号*</label></td>
+					<td><input id="usr_account" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_pwd">密码</label></td>
+					<td><input id="usr_pwd" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_fullname">姓名*</label></td>
+					<td><input id="usr_fullname" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_dept1">一级部门</label></td>
+					<td><input id="usr_dept1" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_dept2">二级部门</label></td>
+					<td><input id="usr_dept2" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_role">角色</label></td>
+					<td><input id="usr_role" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_mail">电子邮件</label></td>
+					<td><input id="usr_mail" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_mobile">手机</label></td>
+					<td><input id="usr_mobile" type="text"></td>
+				</tr>
+				<tr>
+					<td><label for="usr_type">类型*</label></td>
+					<td><input id="usr_type" type="text"></td>
+				</tr>
+			</tbody></table>
+			<div class="pop_bottom_butt">
+				<button id="DefectInfo_cancel">取消</button>
+				<button id="DefectInfo_save">保存</button>				
+			</div>
+		</div>
+	</div>
+	</div><!--用于结束container-->
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/download.min.js"></script>
+<script type="text/javascript" src="js/DefectList.js"></script>
+</html>

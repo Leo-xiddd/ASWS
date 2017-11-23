@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>提测单列表</title>
+		<link rel="stylesheet" type="text/css" href="css/sblist.css">
+	</head>
+	<body>
+		<table cellpadding="0" cellspacing="0" width=100%>
+		<tbody><tr>
+			<td width=35% valign="top">
+				<div class="newtp">
+					<span id="Test_Proj"></span>&nbsp;<span id="Test_Version"></span>提测记录
+					<hr>
+				</div>
+
+				<div id="div_sblist" class="sbbody">
+					<table cellspacing="0" cellpadding="0">
+					<tbody id="sblist">						
+					</tbody>		
+					</table>
+				</div>
+			</td valign="top">
+			<td>
+				<div id="proj_sb">
+					<header class="sbtitle">
+						<span>项目提测单</span>
+					</header>
+					<!-- 常规提测单 -->
+					<div id="basicinfo" class="formbody">
+						<table cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr height=30> 
+								<td width="70"><b>提测人：</b></td>
+								<td width="90"><span id="Submitter"></span></td>
+								<td width="105"><b>提测版本(</b>必填<b>)：</b></td>
+								<td width="80"><input id="Proj_Subversion" type="text" style="width:60px;"/></td>
+								<td width="65"><b>提测时间：</b></td>
+								<td width="140"><span id="Submittime"></span></td>
+								<td width="40"><b id="sbstate">状态：</b></td>
+								<td width="76"><span id="Submitstatus"></span></td>
+							</tr>
+							<tr height=30>					
+								<td><b>产品经理：</b></td>
+								<td><select id="Proj_Manager" class="inputbox" style="width:70px;"></select></td>
+								<td><span><b>研发Bug负责人：</b></span></td>
+								<td colspan=5><input id="Developer" type="text" style="width:406px;"/></td>
+							</tr>
+						</tbody>
+						</table>
+
+						<div id="verinfo">
+							<label for="FunctionDes"><b>版本新增功能描述(</b>必填<b>)：</b></label>
+							<textarea id="FunctionDes" type="text"></textarea>
+							<label for="FunctionDes"><b>版本测试范围建议(</b>必填<b>)：</b></label>
+							<textarea id="Range" type="text"></textarea>
+						</div>
+
+						<div id="gitpath">
+							<div>
+								<span><b>UI代码库-分支(</b>必填<b>)：</b></span><br>
+								<input id="UED_codeurl" type="text" class="git" value="http://git.ctags.cn/***.git"/>
+								<span>-</span>
+								<input id="UED_codeurl_branch" type="text" class="branch" />
+							</div>
+							<div>
+								<span><b>前端代码库-分支(</b>必填<b>)：</b></span><br>
+								<input id="front_codeurl" type="text" class="git" value="http://git.ctags.cn/***.git"/>
+								<span>-</span>
+								<input id="front_codeurl_branch" type="text" class="branch"/>
+							</div>
+							<div>	
+								<span><b>后端代码库-分支：</b></span><br>
+								<input id="Other_codeurl" type="text" class="git" value="http://git.ctags.cn/***.git"/>
+								<span>-</span>
+								<input id="Other_codeurl_branch" type="text" class="branch"/>
+							</div>
+							<div>
+								<span><b>部署文档链接(</b>必填<b>)：</b></span><br>
+								<textarea id="Wikiurl" type="text" style="height:44px;line-height:20px;">http://jw.tech.bitauto.com:8090/pages/viewpage.action?pageId=</textarea>
+							</div>
+						</div>
+					</div>
+					<!-- 性能测试提测单 -->
+					<div id="TPinfo" class="formbody">
+
+					</div>
+					<div id="sb_buttgroup" align="right" style="margin-top: 5px;margin-bottom: 25px;">
+						<button id="btnClose">取消</button>
+						<button id="btnSubmit">保存</button>
+					</div>
+				</div>
+			</td>
+		</tr></tbody>
+		</table>
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="js/comm.js"></script>
+	<script type="text/javascript" src="js/sblist.js"></script>
+</html>

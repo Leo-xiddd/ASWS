@@ -1,0 +1,44 @@
+body{
+	background-image: url(../img/login_back.jpg);	
+	background-repeat:no-repeat;
+	background-size:cover; 
+/*	background-color: #010A09;*/
+}
+#Title{
+	display:block;
+	margin-top:100px;
+	text-align:center;
+	font-family:'Axure Handwriting';
+	height:50px;
+	line-height:50px;
+	font-size: 46px;
+	color:#FFFFFF;
+	font-weight: bolder;
+}
+#loginpanel{
+	display:block;
+	position:relative;
+	top:120px;
+	padding-left:50px;
+}
+
+.logininfo{
+	width:150px;
+	height:25px;
+	padding-left:10px;
+	padding-right:10px;
+	font-family:'微软雅黑';
+	font-size: 16px;
+	color:#FFFFFF;
+	background-color:rgba(188,195,241,0.3);
+}
+.button{
+	width:100px;
+	height:33px;
+	font-family:'微软雅黑';
+	font-size: 18px;
+	color:#FFFFFF;
+	text-align:center;
+	border-radius: 3px;
+	background-color:rgba(188,195,241,0.1);
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>提交测试报告</title>
+	<link rel="stylesheet" type="text/css" href="css/Treport.css">	
+</head>
+
+<body>
+	<div class="container">	
+		<img src="img/logo.png" width="114.24" height="48.96" style="padding-left: 10px;margin-top:10px;"/>
+		<div id="title"><span id="Proj_Name"></span><span id="Proj_Subversion"></span>测试报告</div>
+		<hr>    
+		<table width=100%>
+		<tr>				
+			<td width=50% class="plustitle f">报告日期: <span id="Report_time"></span></td>
+			<td class="plustitle r">报告人：<span id="Reporter"></span></td>
+		</tr>
+		</table>
+		<div class="TRtitle">1. 测试结论</div>
+		<div class="TRcontent">本次测试共执行用例<input id="Num_tc_exe" class="del" type="text" style="width:30px;"/>条，其中<input class="del" id="Num_tc_fail" type="text" style="width:30px;"/>条用例执行未通过，失败率<span><a id="Rate_tc_fail"></a>%</span>, 当前遗留bug共计<input class="del" id="Num_bug_unclose" type="text" style="width:30px;"/>个，根据上线标准，测试结论为
+		<select class="del" id="TestResult" type="text" style="width:80px;font-weight:600;">
+			<option>通过</option>
+			<option>不通过</option>
+		</select>，参考标准请见《车慧产品上线活动流程规范》。</div>
+		<div class="TRcontent">本次测试中发现的主要问题如下：</div>         
+		<textarea id="issues" type="text" class="del" style="height: 100px; width: 93%;"></textarea>
+		
+		<div class="TRtitle">2. 测试基本信息</div>
+		<table class="TRcontent">
+			<tbody>
+			<tr class="del" height="30px">
+				<td width=50%>测试周期：<input class="del" type="date" id="Time_start" style="width:120px;"/>至<input class="del" type="date" id="Time_end" style="width:120px;"/>，共计<span id="Timecost"></span>天</td>
+				<td>测试负责人：<select class="del" id="Responsor" style="width:90px;margin-left:5px;"></select></td>
+			</tr>
+			<tr class="del" height="30px">
+				<td>测试版本：<span id="Proj_Subversion_2"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;测试轮数：<span id="Cycles"></span></td>
+				<td>测试工程师：<input class="del" id="Testengineer" type="text" style="width:250px;text-align:left;padding-left:3px;padding-right:3px;"/></td>
+			</tr>
+			<tr id="insertp" height="25px">
+				<td colspan=2>
+				<span class="TRcontent" style="top:10px;margin-left:0px;">本次测试的测试范围包括：</span>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<textarea id="Range" type="text" class="del" style="height:100px;width:93%;top:10px"></textarea>
+		
+		<div class="TRtitle">3. 缺陷统计</div>
+
+		<table class="TRcontent" width=93% height="50" style="left:25px;text-indent:0;" cellspacing="0" cellpadding="0">
+		<tbody>
+			<tr>
+				<th>总Bug数</th>
+				<th>遗留Bug</th>
+				<th>遗留严重Bug</th>
+				<th>重新打开</th>
+				<th>关闭</th>
+				<th>Open Rate(%)</th>
+				<th>Reopen Rate(%)</th>
+				<th style="border-right:1px solid;">DQS</th>
+			</tr>
+			<tr>
+				<td class="static"><input id="Num_bug_total" type="text" style="width: 85px;border:0px"/></td>
+				<td class="static"><input id="Num_bug_unclose_2" type="text" style="width:90px;border:0px"/></td>
+				<td class="static"><input id="Num_bug_ul3" type="text" style="width:140px;border:0px"/></td>
+				<td class="static"><input id="Num_bug_reopen" type="text" style="width:110px;border:0px"/></td>
+				<td class="static"><input id="Num_bug_close" type="text" style="width:85px;border:0px"/></td>
+				<td class="static"><input id="Rate_bug_open" type="text" style="width:120px;border:0px"/></td>
+				<td class="static"><input id="Rate_bug_reopen" type="text" style="width:120px;border:0px"/></td>
+				<td class="static" style="border-right:1px solid;"><input id="Num_dqs" type="text" style="width:85px;border:0px"/></td>
+			</tr>
+		</tbody>
+		</table>
+		<span class="picnote">注：统计数据均为当前版本累计数据</span>
+		
+		<div class="TRtitle">4. 测试环境</div>
+		<span class="TRcontent" style="margin-left:0px;">本次测试所使用的环境说明如下：</span>				
+		<textarea id="Testconditions" class="del" type="text" style="height: 100px; width:93%;"></textarea>
+		
+		<div id="TR_butt_group" style="display: block; position: relative;top:30px;text-align:right;margin-right:30px;margin-bottom:20px;">
+			<button id="btnClose">关闭</button>&nbsp;<button id="btnSubmit">保存</button>
+		</div>
+		
+		<div style="margin-top:30px;">
+			<span class="TRcontent">测试管理系统ALM访问地址：
+				<a href=" http://192.168.56.12:8080/qcbin/start_a.jsp "> http://192.168.56.12:8080/qcbin/start_a.jsp </a>
+			</span>
+		</div>
+
+		<footer>
+			<hr width="900">
+			<span class="copyri">&copy; 2017&nbsp; 车慧&nbsp; AutoSmart &nbsp;&nbsp;&nbsp; 质量管理部</span>
+		</footer>
+	</div>	
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/New.TR.js"></script>
+</html>

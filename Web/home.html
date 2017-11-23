@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TMS登录页</title>
+	<link rel="stylesheet" type="text/css" href="css/frm_title.css">
+</head>
+
+<body style="margin:0;border:0;">
+	<header>
+		<table width="100%">
+		<tbody><tr>
+			<td id="Title">ASWS&nbsp;研发工作协作平台</td>
+			<td id="Modul"></td>
+			<td class="wlcome" align="right">欢迎您，<a id="user" class="wlcome"></a>
+			<button id="usrMan" class="exit_butt" style="width:14px;height:13px;padding:0px;margin:0px;border:0px"></button></td>		
+			<td width=250px align="right"><button id="exit" class="exit_butt" style="width:60px;height:25px;">退出</button></td>
+		</tr></tbody>
+		</table>
+	</header>
+	
+	<div id="menu"><table width="100%" cellspacing="0" cellpadding="0">
+		<tbody><tr>
+			<td width="12%" valign="top" style="background-color: #295669;">
+				<div id="sidebar" align="center">
+					<button id="workshop" class="butt_menu">工作系统</button>
+					<div id="workshop_submenu" class="submenu">
+						<button class="butt_submenu" id="weekreport" data-value="enable">工作周报</button>
+						<button class="butt_submenu" id="RDcloud" data-value="enable">研发云</button>
+					</div>
+
+					<button id="RD" class="butt_menu">产品研发</button>
+					<div id="RD_submenu" class="submenu">
+						<button class="butt_submenu" id="blank" data-value="enable">需求管理</button>
+						<button class="butt_submenu" id="projlist" data-value="enable">项目管理</button>
+					</div>
+
+					<button id="QA" class="butt_menu">质量管理</button>
+					<div id="QA_submenu" class="submenu">
+						<button class="butt_submenu" id="TP_list" data-value="enable">功能测试</button>						
+						<button class="butt_submenu" id="TestExce" data-value="enable">测试实施</button>
+						<button class="butt_submenu" id="PQR" data-value="enable">质量审计</button>						
+						<button class="butt_submenu" id="Log_verify" data-value="enable">日志分析工具</button>
+						<button class="butt_submenu" id="blank" data-value="enable">性能测试</button>						
+					</div>
+
+					<button id="Sysconf" class="butt_menu">系统管理</button>
+					<div id="Sysconf_submenu" class="submenu">
+						<button class="butt_submenu" id="UsrMange" data-value="enable">用户管理</button>
+						<button class="butt_submenu" id="Purview" data-value="enable">权限管理</button>						
+					</div>
+				</div>
+			</td>
+			<td>
+				<div id="content">
+					<iframe id="main" width=100% height=600 frameborder=0></iframe>
+				</div>
+			</td>
+		</tr></tbody>
+	</table></div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/homepage.js"></script>
+</html>

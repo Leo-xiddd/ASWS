@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html style="margin:0">
+<head>
+	<meta charset="utf-8">
+	<title>产品质量审计报告</title>
+	<link rel="stylesheet" type="text/css" href="css/PQRlist.css">	
+	<link rel="stylesheet" type="text/css" href="css/jquery.treeview.css"/>
+</head>
+
+<body style="margin:0">
+	<table cellpadding="0" cellspacing="0" width=100%>
+	<tbody>
+	<tr height=600px>
+		<td width=14% valign="top">
+			<div id="list">
+				<button id="add">创建报告</button>
+				<button id="del">删除报告</button>
+			</div>
+			<div id="list_box">
+				<div id="treebox">
+					<ul id="treelist" class="filetree"></ul>
+				</div>
+			</div>
+		</td>
+		<td valign="top">
+			<iframe id="ifrb" width=100% height=600px frameborder=0></iframe>
+			<!--弹层：创建报告时的日期选择窗口-->
+			<div id="newfile_panel">
+				<div class="des pan"><b>请选择要创建报告的阶段</b></div>
+				<div class="des pan rr">年份
+					<select id="pqr_year" style="width:70px;"/>
+						<option>2016</option>
+						<option>2017</option>
+						<option>2018</option>
+						<option>2019</option>
+						<option>2020</option>
+						<option>2021</option>
+						<option>2022</option>
+						<option>...</option>
+					</select>
+					
+					<span>&nbsp;&nbsp;&nbsp月/季度</span>
+					<select id="pqr_month" style="width:60px;"/>
+						<option>1月</option>
+						<option>2月</option>
+						<option>3月</option>
+						<option>1季度</option>
+						<option>4月</option>
+						<option>5月</option>
+						<option>6月</option>
+						<option>2季度</option>
+						<option>7月</option>
+						<option>8月</option>
+						<option>9月</option>
+						<option>3季度</option>
+						<option>10月</option>
+						<option>11月</option>
+						<option>12月</option>
+						<option>4季度</option>
+					</select>
+				</div>
+				<div id="butt_panel">
+					<button id="newpqr_sel_cancle" style="width:60px;">取消</button>
+					<button id="newpqr_sel_next" style="width:60px;">下一步</button>
+				</div>
+			</div>
+		</td>
+	</tr>
+	</tbody>
+	</table>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/jquery.treeview.js"></script>
+<script type="text/javascript" src="js/pqr.js"></script>
+</html>

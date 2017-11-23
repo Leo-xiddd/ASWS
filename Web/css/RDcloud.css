@@ -1,0 +1,319 @@
+body{
+	overflow-y : auto;
+	overflow-x : hidden;
+	background-color: #F8F8D8;
+	margin:0;
+	border:0;
+}
+.overlay{
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:3; 	
+	border:0;
+	margin:0;	
+}
+.head_butt{
+	border:1.5px outset #6EA8C9;
+	width:100px;
+	height:24px;
+	border-radius: 5px;
+	font-family:'微软雅黑';
+	font-size:12px;	
+	color: #FFFFFF;
+	background-color: #2C5C77;
+	margin-right: 20px;
+}
+.ProjTreeview{
+	display:none;
+	position:relative;
+	left:25px;
+	width:93.5%;
+	margin-left:5px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+#treebox{
+	height:250px;
+	background-color:#FFFFFF;
+	padding:5px;
+	border:2px inset ;
+	overflow-y:auto;
+}
+.popupwindow{
+	display:none;
+	position:absolute;
+	z-index:5; 
+	background-color:#EEF1F1;
+	font-family:'微软雅黑';
+	border:1px solid #27623C;
+	border-radius:3px;
+	background-origin: border-box;
+	box-shadow: 5px 8px 10px 2px #879EB0;
+}
+.formbody{
+	padding:20px;
+	padding-top:5px;
+	font-size:12px;		
+}
+.formbody tr{
+	height: 35px;
+}
+.formbody input{
+	width: 120px;
+	margin-right: 5px;
+	font-size: 12px;
+	padding-left: 5px;
+	color: #4A4A4A;
+}
+.formbody button{
+	font-size: 12px;
+	width: 60px;
+	height: 25px;
+	background-color: #4B8AA0;
+	color: #FFFFFF;
+	border-radius: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.formtitle{
+	font-size:14px;		
+	font-weight: 600px;
+	color: #FFFFFF;
+	background-color: #4B8AA0;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 15px;
+}
+li{
+	font-size: 12px;
+	font-family:'微软雅黑';
+	margin-left:1em;
+}
+.small_chart{
+	height: 120px;
+	width: 120px;
+	background-color:#FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+}
+.chart_title{
+	font-size: 12px;
+	font-family:'微软雅黑';
+	font-weight: 600;
+	text-align:center;
+	padding-top: 10px;
+	color: #4D676F;
+}
+#top_chats{
+	margin-bottom: 30px;
+	margin-left: 30px;
+	margin-right: 30px;
+	border:1.5px outset #D1D1D1;
+	border-top-right-radius:3px;
+	border-top-left-radius:3px;
+	background-color: #FFFFFF;
+}
+#title_top_charts{
+	height:22px;
+	line-height:22px;
+	font-family:'微软雅黑';
+	font-size:12px;	
+	color:#454545;
+	padding-left:20px;
+	padding-right:10px;
+	padding-top:2px;
+	background-color: #F2F2F2;
+	border-bottom: 1px solid #D1D1D1;
+	text-align:left;
+}
+#tag_mem{
+	height: 16px;
+	width: 24px;
+	background-color: #F2B721;
+}
+#tag_disk{
+	height: 16px;
+	width: 24px;
+	background-color: #5F9FC4;
+}
+.box_fold{
+	width:18px;
+	height:16px;
+	margin-top: 2px;
+	padding:0px;
+	border:1px outset #A3A3A3;
+	background-image:url(../img/min.png);
+}
+#vm_body{
+	margin-top: 22px;
+	margin-bottom: 10px;
+	margin-left: 30px;
+	margin-right: 30px;
+	padding: 10px;
+	background-color: #F2F2F2;
+	border:1.5px outset #D1D1D1;
+	font-size: 12px;
+	font-family:'微软雅黑';
+}
+#vm_basicinfo{
+	margin-left: 10px;
+	padding-left:5px;
+}
+#vm_basicinfo img{
+	display: block;
+	position:absolute;
+	z-index:2; 
+	top:35px;
+	width:20px;
+	height:20px;
+}
+#ico_addserv{
+	left:350px;
+}
+#ico_editserv{
+	left:390px;
+}
+#ico_delserv{
+	left:430px;
+}
+#ico_ippool{
+	left:470px;
+}
+#title_vm_basicinfo{
+	font-size: 14px;
+	font-weight: 600;
+	font-family:'微软雅黑';
+	margin-right: 300px;
+}
+#tab_vm_basicinfo{
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+}
+#tab_vm_basicinfo tr{
+	height: 25px;
+}
+#tab_vm_basicinfo span{
+	color: #4A4A4A;
+}
+#bottom_vm_basicinfo{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#bottom_vm_basicinfo select{
+	font-size: 12px;
+	font-family:'微软雅黑';
+	height: 21px;
+}
+#bottom_vm_basicinfo input{
+	width: 120px;
+}
+#vmlist{
+	margin-left: 10px;
+	padding-left:15px;
+	padding-top: 10px;
+}
+#tab_vmlist{
+	border: 1.5px inset #DEDEDE;
+}
+#tab_vmlist tr{
+	height: 25px;
+}
+#tab_vmlist th{
+	border-left: 1px solid #DEDEDE;
+	background-color: #4B8AA0;
+	color: #FFFFFF;
+}
+#tab_vmlist td{
+	border-left: 1px solid #DEDEDE;
+	border-bottom: 1px solid #DEDEDE;
+	text-align:center;
+	word-break:break-all;
+}
+#tb_vmlist tr{
+	background-color: #FFFFFF;
+}
+#VMinfo{
+	top:20%;
+	left:35%;
+}
+#Servinfo{
+	top:20%;
+	left:35%;
+}
+#vm_des{
+	width: 200px;
+}
+#form_ip{
+	top:10%;
+	left:35%;
+}
+#form_ip_head{
+	margin-right: 20px;
+}
+#form_ip_head button{
+	width: 90px;
+	margin-bottom: 10px;
+	background-color: #2C5C77;
+}
+.form_bottom{
+	text-align: center;
+}
+.title_tab{
+	background-color: #4B8AA0;
+	border-left: 1px solid #DEDEDE;
+	color: #FFFFFF;
+	height: 25px;
+	text-align: center;
+}
+#tbody_iplist tr{
+	height: 25px;
+}
+#tbody_iplist td{
+	border-bottom: 1px solid #DEDEDE;
+	border-right:  1px solid #DEDEDE;
+	background-color: #FFFFFF;
+	padding-left: 5px;
+}
+#iplist{
+	margin-left: 1px;
+	overflow-y: scroll;
+	border: 1.5px inset #DEDEDE;
+	height: 300px;
+}
+#form_findvm{
+	top:10%;
+	left:10%;
+}
+#form_findvm_head{
+	margin-right: 20px;
+}
+#findvmlist{
+	margin-left: 1px;
+	overflow-y: scroll;
+	border: 1.5px inset #DEDEDE;
+	height: 300px;
+}
+#tbody_findvmlist tr{
+	height: 25px;
+}
+#tbody_findvmlist td{
+	border-bottom: 1px solid #DEDEDE;
+	border-right:  1px solid #DEDEDE;
+	background-color: #FFFFFF;
+	padding-left: 5px;
+}
+#form_findvm_title{
+	margin-bottom: 20px;
+}
+#findvm_nuum{
+	font-size: 12px;
+	font-family:'微软雅黑';
+}

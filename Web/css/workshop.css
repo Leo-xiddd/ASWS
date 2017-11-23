@@ -1,0 +1,56 @@
+body{
+	margin:0px;
+	overflow-x : hidden;
+	overflow-y : hidden;
+}
+#container{
+	padding:40px;
+	padding-left:80px;
+}
+.bookmark{
+	padding:15px;
+	height:240px;
+	width:90px;
+}
+.box_sel{
+	border:0;
+	width:63px;
+	height:240px;
+}
+#cell_1{
+	background: url(../img/c1.jpg) no-repeat 15px 15px;
+}
+#cell_2{
+	background: url(../img/c2.jpg) no-repeat 15px 15px;
+}
+#cell_3{
+	background: url(../img/c3.jpg) no-repeat 15px 15px;
+}
+#cell_4{
+	background: url(../img/c4.jpg) no-repeat 15px 15px;
+}
+#cell_5{
+	background: url(../img/c5.jpg) no-repeat 15px 15px;
+}
+#cell_6{
+	background: url(../img/c6.jpg) no-repeat 15px 15px;
+}
+#cell_7{
+	background: url(../img/c7.jpg) no-repeat 15px 15px;
+}
+#cell_8{
+	background: url(../img/c8.jpg) no-repeat 15px 15px;
+}
+.title_butt{
+	display:block;
+	position:relative;
+	font-family:'微软雅黑';	
+	font-size: 14px;
+	color:#FFFFFF;
+	background-color: rgba(206,247,255,0.2);
+	border:1px solid #CEF7FF;
+	border-radius:10px;
+	margin-top:20px;
+	width:90%;
+	height:30px;
+}
